@@ -18,7 +18,7 @@ class User(db.Model):
     password = db.Column(db.String(240), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     role = db.Column(db.Enum(Role), nullable=False, default="user")
-    banda = de.Column(db.Enum(Banda), nullable=False)
+    banda = db.Column(db.Enum(Banda), nullable=False)
 
     def __repr__(self):
         return '<User %r>' % self.id
