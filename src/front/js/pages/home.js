@@ -7,7 +7,7 @@ export const Home = () => {
   return (
    <div>
       <div className="d-flex justify-content-center">
-	  <img src={benHarper} class="img-fluid" alt="..." className="col-10 justify-content-center mt-3"
+	  <img src={benHarper} alt="..." className="img-fluid col-10 justify-content-center mt-3"
 	  
 ></img>
       </div>

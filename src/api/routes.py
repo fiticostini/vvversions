@@ -59,21 +59,21 @@ def login():
     body = request.json
     email = body.get("email", None)
     password = body.get("password", None)
-
+    print(email, password)
     if email is None or password is None:
         return {"error": "Todos los campos son requeridos"}, 400
 
     login_user = User.query.filter_by(email=email).first()
 
     if not login_user:
-        return {"error": "Ususario no encontrado"}, 401
+        return {"error": "Usuario no encontrado"}, 401
 
     if check_password_hash(login_user.password, password):
         token = create_access_token({"id": login_user.id})
         print(token)
         return jsonify({"access_token": token})
     else:
-        return "Contrasena incorrecta", 401
+        return jsonify({"error": "Contrasena incorrecta"}), 401
 
 
 @api.route("/change-password", methods=["PUT"])

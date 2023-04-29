@@ -28,7 +28,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						password: password,
 					}),
 				}
-				try{
+				try{ 
+					console.log(email, password)
 					const response = await fetch(
 						`${process.env.BACKEND_URL}/api/user/login`, options
 					)
@@ -36,7 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 				if (!response.ok) {
 					const error = await response.json();
-					throw new error(error.message);
+					throw new Error(error.message);
 				}
 				const data = await response.json();
 				localStorage.setItem("token", data.access_token);

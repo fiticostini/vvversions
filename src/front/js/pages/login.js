@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
     const navigate = useNavigate();
     const{store, actions} = useContext(Context)
-    const [loginData, setLoginData] = useState({email:"", password:""});
+    const [loginData, setLoginData] = useState({"email":"", "password":""});
     const handleChange = (event) => {
         setLoginData({...loginData, [event.target.name]:event.target.value});
     };
