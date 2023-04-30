@@ -5,26 +5,18 @@ db = SQLAlchemy()
 
 class Role(enum.Enum):
     musicians = "musicians"
-    producer = "producer"
     manager = "manager"
     other = "other"
 
-class Performertype(enum.Enum):
-    band = "band"
-    soloist = "soloist"
-    artist_collective = "artist_collective"
-    guest = "guest"
-
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    fullname = db.Column(db.String(80), nullable=True)
     artist_name = db.Column(db.String(80), nullable=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(240), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     role = db.Column(db.Enum(Role), nullable=False, default="other")
-    performertype = db.Column(db.Enum(Performertype), nullable=False, default="guest")
+   
 
     def __repr__(self):
         return '<User %r>' % self.id
@@ -32,13 +24,11 @@ class User(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "fullname": self.fullname,
             "username": self.username,
             "email": self.email,
-            "password": self.password,
+            "artist_name": self.artist_name,
             "is_active": self.is_active,
             "role": self.role,
-            "performertype": self.performertype
         }
 
 

@@ -73,7 +73,8 @@ a:active {
     height: 500px;
     background-color: #D8CECE;
     margin-top: 90px;
-    margin-left: 180px
+    margin-left: 180px;
+    border-radius: 4px;
 }
 
 .publicity {
@@ -81,7 +82,8 @@ a:active {
     height: 650px;
     background-color: #F46868;
     margin-top: 20px;
-    margin-left: 237px
+    margin-left: 237px;
+    border-radius: 4px;
 }
 
 .nameofband {
@@ -131,10 +133,10 @@ a:active {
 }
 
 .submit {
-    background-color: rgb(30, 108, 251);
+    background-color: rgb(50, 116, 239);
     margin-top: 14px;
     border: white;
-    border-radius: 3px;
+    border-radius: 4px;
     width: 100px;
     height: 40px;
 

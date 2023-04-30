@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: cec20283baa8
+Revision ID: 8efdb7405407
 Revises: 
-Create Date: 2023-04-29 19:22:16.719760
+Create Date: 2023-04-30 18:21:45.758744
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'cec20283baa8'
+revision = '8efdb7405407'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -36,14 +36,12 @@ def upgrade():
     )
     op.create_table('user',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('fullname', sa.String(length=80), nullable=True),
     sa.Column('artist_name', sa.String(length=80), nullable=True),
     sa.Column('username', sa.String(length=50), nullable=False),
     sa.Column('email', sa.String(length=120), nullable=False),
     sa.Column('password', sa.String(length=240), nullable=False),
     sa.Column('is_active', sa.Boolean(), nullable=False),
-    sa.Column('role', sa.Enum('musicians', 'producer', 'manager', 'other', name='role'), nullable=False),
-    sa.Column('performertype', sa.Enum('band', 'soloist', 'artist_collective', 'guest', name='performertype'), nullable=False),
+    sa.Column('role', sa.Enum('musicians', 'manager', 'other', name='role'), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')

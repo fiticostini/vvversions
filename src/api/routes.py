@@ -28,15 +28,14 @@ def handle_hello():
 def register():
     body = request.json
     username = body.get("username", None)
-    fullname = body.get("fullname", None)
     artist_name = body.get("artist_name", None)
     email = body.get("email", None)
     password = body.get("password", None)
-    role = body.get("role", None)
-    performertype = body.get("performertype", None)
+    role = body.get("role", None)   
     is_active = True
-    
-    if username is None or fullname is None or artist_name is None or email is None or password is None or role is None:
+    print("*****")
+    print(body)
+    if username is None or artist_name is None or email is None or password is None or role is None:
         return {"error": "todos los campos son requeridos"}, 400    
 
     if role not in Role.__members__:
@@ -44,7 +43,7 @@ def register():
 
     user_hash = generate_password_hash(password)
         
-    new_user = User(username=username, fullname= fullname, artist_name=artist_name, email=email, password=user_hash, role=role, performertype=performertype, is_active=is_active)
+    new_user = User(username=username,  artist_name=artist_name, email=email, password=user_hash, role=role, is_active=is_active)
     db.session.add(new_user)
     try:
         db.session.commit()

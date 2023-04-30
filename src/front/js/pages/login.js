@@ -19,7 +19,16 @@ const Login = () => {
     const handleSubmit = (event) => {
       event.preventDefault()
       console.log("me diste click");
-      actions.loginFirst(loginData.email, loginData.password);
+      if (loginData.email !== "" || loginData.password != "") {
+        actions.loginFirst(loginData.email, loginData.password);
+        actions.isLogin();
+        if ( store.islogin == true ) {
+          navigate("/prueba")
+        }
+
+      }
+     
+
       
     };
   return (
