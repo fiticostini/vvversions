@@ -8,10 +8,15 @@ let phrases = ["A place where you can follow the growth of your songs, enough of
 
 
 const Publicity = () => {
+    (phrases.map((item, index)  =>)
+    
+    
+   
     return (
 <div>
 
 </div>
+ )
     )
 };
 
