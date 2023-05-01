@@ -1,6 +1,7 @@
 import React, {useContext} from "react";
 import { useForm } from "react-hook-form";
 import { Context } from "../store/appContext"; 
+import { useNavigate } from "react-router-dom";
 
 
 export const Register = () => {
@@ -12,6 +13,8 @@ export const Register = () => {
     const OnSubmit = (data) => {
        
         actions.registerFunction(data)
+
+        
     }
     return (<div className="d-flex">
         <div className="form p-3 ">

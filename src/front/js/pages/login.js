@@ -21,7 +21,7 @@ const Login = () => {
       actions.loginFirst(loginData.email, loginData.password);
       actions.isLogin();
       if (store.islogin == true) {
-        navigate("/prueba");
+        navigate("/main");
       }
     }
   };
