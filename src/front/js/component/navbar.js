@@ -1,11 +1,18 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 
 
 
 export const Navbar = () => {
 	const location = useLocation()
+	const {store, actions} = useContext(Context);
+	const navigate = useNavigate()
+	const handleLogout = () => {
+	const response = actions.logout()
+	if (response) navigate("/")
+	}
 	return (
 		<nav className={location.pathname==`/register`? `navbar navbarregister` : location.pathname==`/single`? `navbar navbarsingle`: `navbar navbarhome` }>
 			<div className="container">
@@ -20,6 +27,7 @@ export const Navbar = () => {
 					<Link to="/user/login">
 						<button className="botonlogin text-dark">Sign In</button>
 					</Link>
+					<button onClick={handleLogout} className="btn btn-danger text-dark">Log out</button>
 				</div>
 			</div>
 		</nav>

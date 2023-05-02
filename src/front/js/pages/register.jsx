@@ -7,12 +7,16 @@ import { useNavigate } from "react-router-dom";
 export const Register = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const navigate = useNavigate();
 
     const {store, actions} = useContext(Context);
 
-    const OnSubmit = (data) => {
+    const OnSubmit = async (data) => {
        
-        actions.registerFunction(data)
+    const response = await actions.registerFunction(data)
+
+    if (response) {navigate("/user/login")}
+    else {alert ("No registro debidamente")}
 
         
     }
