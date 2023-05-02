@@ -22,10 +22,10 @@ export const Navbar = () => {
 				</Link>
 				<div className="ml-auto">
 					<Link to="/register">
-						<button className="botonregister text-white me-3">Register</button>
+						<button  disabled={location.pathname==`/register`? true : false } className={location.pathname==`/register`? "invisible" : "botonregister text-white me-3"}>  Register</button>
 					</Link>
 					<Link to="/user/login">
-						<button className="botonlogin text-dark">Sign In</button>
+						<button className="botonlogin text-white me-3">Sign In</button>
 					</Link>
 					<button onClick={handleLogout} className="btn btn-danger text-dark">Log out</button>
 				</div>

@@ -62,9 +62,8 @@ const Login = () => {
             id="exampleInputPassword1"
           />
         </div>
-        
-          <button type="submit" className="btn btn-primary">
-        
+
+        <button type="submit" className="btn btn-primary">
           Login
         </button>
       </form>

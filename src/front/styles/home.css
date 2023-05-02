@@ -1,5 +1,6 @@
 body {
-    background-color: #ddd7d7
+    background-color: #ffffff;
+    font-family: Courier New;
 }
 
 .imagen {
@@ -7,7 +8,8 @@ body {
 }
 
 .navbarhome {
-    background-color: #6BB6A4;
+    background-color: #000000;
+   
 
 }
 
@@ -35,7 +37,7 @@ body {
     box-shadow: 0px 0px 0px #666666;
     text-shadow: 1px 1px 3px #ffffff;
     border: dotted #ffffff 0px;
-    background: #D43F3F;
+    background: #000000;
     padding: 12px;
 }
 
@@ -54,12 +56,14 @@ body {
     box-shadow: 0px 0px 0px #666666;
     text-shadow: 1px 1px 3px #ffffff;
     border: dotted #ffffff 0px;
-    background: #6BF5ED;
+    background: #000000;
     padding: 12px;
 }
 
 .footer {
-    background-color: #ddd7d7
+    background-color: #ffffff;
+    opacity: 0;
+    
 }
 
 a:link,
@@ -86,51 +90,6 @@ a:active {
     border-radius: 4px;
 }
 
-.nameofband {
-    width: 450px;
-    margin-left: 17px;
-    margin-top: 15px;
-    border: white;
-    background-color: rgb(254, 254, 254);
-    border-radius: 3px;
-}
-
-.username {
-    width: 450px;
-    margin-left: 17px;
-    margin-top: 15px;
-    border: white;
-    background-color: rgb(254, 254, 254);
-    border-radius: 3px;
-}
-
-.password {
-    width: 450px;
-    margin-left: 17px;
-    margin-top: 15px;
-    border: white;
-    background-color: rgb(254, 254, 254);
-    border-radius: 3px;
-}
-
-.email {
-    width: 450px;
-    margin-left: 17px;
-    margin-top: 15px;
-    border: white;
-    background-color: rgb(254, 254, 254);
-    border-radius: 3px;
-}
-
-.select {
-    width: 450px;
-    height: 35px;
-    margin-left: 17px;
-    margin-top: 15px;
-    border: white;
-    background-color: rgb(254, 254, 254);
-    border-radius: 3px;
-}
 
 .submit {
     background-color: rgb(50, 116, 239);
@@ -142,7 +101,13 @@ a:active {
 
 }
 
-.registerlogo {
-    margin-top: 20px;
-    margin-right: 17px;
+.about {
+    width: 1300px;
+    height: 600px;
+}
+
+.botondisabled {
+    pointer-events: none; 
+    opacity: .0;
+    Cursor: default;
 }
