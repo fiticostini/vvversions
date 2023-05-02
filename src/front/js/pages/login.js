@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 
@@ -14,23 +14,29 @@ const Login = () => {
     console.log("redireccionamos al main");
     navigate("/");
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("me diste click");
     if (loginData.email !== "" || loginData.password != "") {
-      actions.loginFirst(loginData.email, loginData.password);
-      actions.isLogin();
-      if (store.islogin == true) {
+      const response = await actions.loginFirst(loginData.email, loginData.password);
+      console.log(response);
+      if (response)  {
         navigate("/main");
+      } else {
+        alert("Credenciales invalidas");
       }
     }
   };
+
+  useEffect(() => {
+    if (store.token && store.token !== null ) navigate("/main")
+  }, [store.token])
   return (
     <div className="container col-6 border bg-light border-black p-5 mt-5">
       <h1 className="text-center">Login</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label for="exampleInputEmail1" className="form-label">
+          <label htmlFor="exampleInputEmail1" className="form-label">
             Email address
           </label>
           <input
@@ -44,7 +50,7 @@ const Login = () => {
           />
         </div>
         <div className="mb-3">
-          <label for="exampleInputPassword1" className="form-label">
+          <label htmlFor="exampleInputPassword1" className="form-label">
             Password
           </label>
           <input
@@ -56,9 +62,8 @@ const Login = () => {
             id="exampleInputPassword1"
           />
         </div>
-        
-          <button type="submit" className="btn btn-primary">
-        
+
+        <button type="submit" className="btn btn-primary">
           Login
         </button>
       </form>

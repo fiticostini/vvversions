@@ -37,7 +37,7 @@ class Song(db.Model):
     title = db.Column(db.String(100), nullable=False)
     gender = db.Column(db.String(80), nullable=False)
     version_date = db.Column(db.String(50), nullable=False)
-    cover_image = db.Column(db.String(250), nullable=False)
+    
 
     def __repr__(self):
         return '<Song %r>' % self.title
@@ -48,17 +48,17 @@ class Song(db.Model):
             "title": self.title,
             "gender": self.gender,
             "version_date": self.version_date,
-            "cover_image": self.cover_image
+            
         }
 
 
 
-class Advertisement(db.Model):
+class Coment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(600), nullable=False)
     start_date = db.Column(db.String(50), nullable=False)
-    end_date = db.Column(db.String(50), nullable=False)
     ad_image = db.Column(db.String(250), nullable=False)
+    
 
     def __repr__(self):
         return '<Song %r>' % self.id
@@ -68,7 +68,6 @@ class Advertisement(db.Model):
             "id": self.id,
             "text": self.text,
             "start_date": self.start_date,
-            "end_date": self.end_date,
             "ad_image": self.ad_image
         }
 
