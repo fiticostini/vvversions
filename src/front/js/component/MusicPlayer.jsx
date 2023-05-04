@@ -91,7 +91,7 @@ const MusicPlayer = () => {
   };
 
   return (
-    <div className="container d-flex">
+    <div className="musicPlayerStyle">
       <audio
         ref={musicPlayer} // Here we connect to our useRef hook
         src="https://storage.googleapis.com/vvversions-proyect.appspot.com/guitarsound.mp3"
@@ -100,26 +100,26 @@ const MusicPlayer = () => {
       ></audio>
 
       {/* Backward 5 seconds */}
-      <button onClick={backFive}>
+      <button className="forwardBackward"onClick={backFive}>
         <i class="fas fa-long-arrow-left"></i> 5
       </button>
 
       {/* Play and Pause botton */}
-      <button onClick={togglePlayPause}>
+      <button className="playPause" onClick={togglePlayPause}>
         {isPlaying ? (
-          <i class="fas fa-pause"></i>
+          <i className="fas fa-pause"></i>
         ) : (
-          <i className="fas fa-play"></i>
+          <i className="fas fa-play play"></i>
         )}
       </button>
 
       {/* Forward 5 seconds */}
-      <button onClick={forwardFive}>
-        5 <i class="fas fa-long-arrow-right"></i>
+      <button className="forwardBackward" onClick={forwardFive}>
+        5 <i className="fas fa-long-arrow-right"></i>
       </button>
 
       {/*Current time*/}
-      <div>{calculateTime(currentTime)}</div>
+      <div className="currenTimeStyle">{calculateTime(currentTime)}</div>
 
       {/*Progress Bar*/}
       <div>
@@ -128,10 +128,11 @@ const MusicPlayer = () => {
           defaultValue="0"
           ref={progressBar}
           onChange={changeRange}
+          className="progressBarStyle"
         ></input>
       </div>
       {/*Duration*/}
-      <div>{duration && !isNaN(duration) && calculateTime(duration)}</div>
+      <div className="durationStyle">{duration && !isNaN(duration) && calculateTime(duration)}</div>
     </div>
   );
 };
