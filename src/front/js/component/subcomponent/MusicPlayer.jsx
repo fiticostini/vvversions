@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import "../../styles/MusicPlayer.css";
+import "../../../styles/MusicPlayer.css";
+import WaveSurfer from "wavesurfer.js";
 
 const MusicPlayer = () => {
   // State
@@ -90,8 +91,22 @@ const MusicPlayer = () => {
     changeRange();
   };
 
+  // Intentando que el waveSurfer funciona aqui:
+  // useEffect(() => {
+  //   const wavesurfer = WaveSurfer.create({
+  //     container: "#waveform",
+  //     waveColor: "violet",
+  //     progressColor: "purple",
+  //   });
+  //   wavesurfer.load(
+  //     "https://storage.googleapis.com/vvversions-proyect.appspot.com/guitarsound.mp3"
+  //   );
+  // }, []);
+
   return (
     <div className="musicPlayerStyle">
+      <div>El SoundWave Pattern deberia ir aqui</div>
+      {/* <div id="waveform">El Wave Surfer deberia de ir aqui</div> */}
       <audio
         ref={musicPlayer} // Here we connect to our useRef hook
         src="https://storage.googleapis.com/vvversions-proyect.appspot.com/guitarsound.mp3"
@@ -100,7 +115,7 @@ const MusicPlayer = () => {
       ></audio>
 
       {/* Backward 5 seconds */}
-      <button className="forwardBackward"onClick={backFive}>
+      <button className="forwardBackward" onClick={backFive}>
         <i class="fas fa-long-arrow-left"></i> 5
       </button>
 
@@ -132,7 +147,9 @@ const MusicPlayer = () => {
         ></input>
       </div>
       {/*Duration*/}
-      <div className="durationStyle">{duration && !isNaN(duration) && calculateTime(duration)}</div>
+      <div className="durationStyle">
+        {duration && !isNaN(duration) && calculateTime(duration)}
+      </div>
     </div>
   );
 };
