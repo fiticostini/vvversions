@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import { useForm } from "react-hook-form";
 import { Context } from "../store/appContext"; 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 
 export const Register = () => {
@@ -12,7 +12,7 @@ export const Register = () => {
     const {store, actions} = useContext(Context);
 
     const OnSubmit = async (data) => {
-       
+
     const response = await actions.registerFunction(data)
 
     if (response) {navigate("/user/login")}
@@ -21,9 +21,11 @@ export const Register = () => {
         
     }
     return (<div className="d-flex">
+         <div className=""><Link to="/"><i className=" fa-solid fa-angles-left text-dark logoback p-3 ">BACK</i></Link></div>
         <div className="form p-3 ">
 
             <form onSubmit={handleSubmit(OnSubmit)}>
+                
                 <h2 className="text-center p-3 mt-3">REGISTER</h2>
                 <div>
                     <div className="p-1">
@@ -96,8 +98,8 @@ export const Register = () => {
         </div>
     </div>
 
-    )
-}
+    );
+};
 
 
 

@@ -41,6 +41,8 @@ class Song(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', backref='song', lazy=True)
+    version_date = db.Column(db.String(50), nullable=False)
+    url = db.Column(db.String(120), nullable=False)
 
     
 
@@ -52,7 +54,9 @@ class Song(db.Model):
             "id": self.id,
             "title": self.title,
             "gender": self.gender,
-            "artist": self.version_date
+            "version_date": self.version_date,
+            "url": self.url,
+            
         }
 
 

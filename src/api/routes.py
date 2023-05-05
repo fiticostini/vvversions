@@ -8,6 +8,7 @@ from flask_jwt_extended import create_access_token
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Role, Comment, Song
 from api.utils import generate_sitemap, APIException
+from api.firebase.firebase import Bucket
 
 api = Blueprint('api', __name__)
 
@@ -161,12 +162,21 @@ def delete_comment(id):
 
 
 
-@api.route("/songs")
-def get_songs():
-    songs = Song.query.all()
-    return jsonify([song.serialize() for song in songs])
 
 
 
 
 
+
+@api.route("/songs", methods={"POST"}) 
+def create_song():
+    form = request.form
+    files = request.files 
+    title = form.get("title")
+    gender = form.get("gender")
+    version_date = form.get("version_date")
+    song = files.get("song")
+    print(title, gender, song, version_date)
+    url = Bucket.upload_file(song, song.filename)
+    print(url)
+    return "ok mi pana"

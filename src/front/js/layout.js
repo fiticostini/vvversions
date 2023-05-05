@@ -12,6 +12,7 @@ import { About } from "./pages/about.jsx";
 
 import { Navbar } from "./component/navbar";
 import Login from "./pages/login";
+import { AddProject } from "./pages/addproject.jsx";
 
 //create your first component
 const Layout = () => {
@@ -33,6 +34,7 @@ const Layout = () => {
                         <Route element={<About />} path="/about" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<Main />} path="/main" />
+                        <Route element={<AddProject />} path="/addproject" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                 </ScrollToTop>
