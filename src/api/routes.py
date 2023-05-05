@@ -8,6 +8,7 @@ from flask_jwt_extended import create_access_token
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Role
 from api.utils import generate_sitemap, APIException
+from api.firebase.firebase import Bucket
 
 api = Blueprint('api', __name__)
 
@@ -97,3 +98,16 @@ def change_password():
         return "cambiando contrasena"
     
     return {"error": "Contrasena invalida"}
+
+@api.route("/songs", methods={"POST"}) 
+def create_song():
+    form = request.form
+    files = request.files 
+    title = form.get("title")
+    gender = form.get("gender")
+    version_date = form.get("version_date")
+    song = files.get("song")
+    print(title, gender, song, version_date)
+    url = Bucket.upload_file(song, song.filename)
+    print(url)
+    return "ok mi pana"

@@ -37,6 +37,8 @@ class Song(db.Model):
     title = db.Column(db.String(100), nullable=False)
     gender = db.Column(db.String(80), nullable=False)
     version_date = db.Column(db.String(50), nullable=False)
+    url = db.Column(db.String(120), nullable=False)
+
     
 
     def __repr__(self):
@@ -48,6 +50,7 @@ class Song(db.Model):
             "title": self.title,
             "gender": self.gender,
             "version_date": self.version_date,
+            "url": self.url,
             
         }
 

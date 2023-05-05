@@ -1,5 +1,5 @@
 body {
-    background-color: #ffffff;
+    background-color: #efefef;
     font-family: Courier New;
 }
 
@@ -9,8 +9,6 @@ body {
 
 .navbarhome {
     background-color: #000000;
-   
-
 }
 
 .navbarregister {
@@ -75,24 +73,24 @@ a:active {
 .form {
     width: 500px;
     height: 500px;
-    background-color: #D8CECE;
-    margin-top: 90px;
-    margin-left: 180px;
+    background-color: #a9a9a9;
+    margin-top: 70px;
+    margin-left: 20px;
     border-radius: 4px;
 }
 
 .publicity {
     width: 450px;
     height: 650px;
-    background-color: #F46868;
-    margin-top: 20px;
-    margin-left: 237px;
+    background-color: #FF3B3F;
+    margin-top: 0px;
+    margin-left: 250px;
     border-radius: 4px;
 }
 
 
 .submit {
-    background-color: rgb(50, 116, 239);
+    background-color: #ff3b3f;
     margin-top: 14px;
     border: white;
     border-radius: 4px;
@@ -104,10 +102,24 @@ a:active {
 .about {
     width: 1300px;
     height: 600px;
+    background-color: #CCEAF4;
 }
 
 .botondisabled {
     pointer-events: none; 
     opacity: .0;
     Cursor: default;
+}
+
+.logoback {
+    margin-top: 600px;
+    margin-left: 50px;
+}
+
+.logout {
+    color: #FF3B3F;
+}
+
+.login {
+    background-color: #a9a9a9;
 }

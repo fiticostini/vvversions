@@ -14,7 +14,7 @@ export const Navbar = () => {
 	if (response) navigate("/")
 	}
 	return (
-		<nav className={location.pathname==`/register`? `navbar navbarregister` : location.pathname==`/single`? `navbar navbarsingle`: `navbar navbarhome` }>
+		<nav className={location.pathname==`/register`? `invisible` : location.pathname==`/about`? `invisible`: `navbar navbarhome` }>
 			<div className="container">
 				
 				<Link to="/">
@@ -27,9 +27,10 @@ export const Navbar = () => {
 					<Link to="/user/login">
 						<button className="botonlogin text-white me-3">Sign In</button>
 					</Link>
-					<button onClick={handleLogout} className="btn btn-danger text-dark">Log out</button>
+					<button onClick={handleLogout} className="border border-0 bg-black logout ">Log out</button>
 				</div>
 			</div>
 		</nav>
+		
 	);
 };

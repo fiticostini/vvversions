@@ -32,15 +32,16 @@ const Login = () => {
     if (store.token && store.token !== null ) navigate("/main")
   }, [store.token])
   return (
-    <div className="container col-6 border bg-light border-black p-5 mt-5">
-      <h1 className="text-center">Login</h1>
+    <div className="container col-4 border login border-black p-5 mt-5">
+      <h1 className="text-center">Sign In</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
-            Email address
+            
           </label>
           <input
             name="email"
+            placeholder="Email"
             value={loginData.email}
             onChange={(event) => handleChange(event)}
             type="email"
@@ -55,6 +56,7 @@ const Login = () => {
           </label>
           <input
             name="password"
+            placeholder="Password"
             value={loginData.password}
             onChange={(event) => handleChange(event)}
             type="password"
@@ -62,10 +64,11 @@ const Login = () => {
             id="exampleInputPassword1"
           />
         </div>
-
-        <button type="submit" className="btn btn-primary">
+<div className="text-center">
+        <button type="submit" className="btn btn-primary ">
           Login
         </button>
+        </div>
       </form>
     </div>
   );
