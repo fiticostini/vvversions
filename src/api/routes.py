@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token
 
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Role
+from api.models import db, User, Role, Comment, Song
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
@@ -97,3 +97,76 @@ def change_password():
         return "cambiando contrasena"
     
     return {"error": "Contrasena invalida"}
+
+
+@api.route("/comments")
+def get_comments():
+    comments = Comment.query.all()
+    return jsonify([comment.serialize() for comment in comments])
+
+
+@api.route("/comments", methods=["POST"])
+def create_comment():
+    body = request.json
+    content = body.get("content", None)
+    user_id = body.get("user_id", None)
+    start_date = body.get("start_date", None)
+    song_id= body.get("song_id", None)
+
+    comment = Comment(content=content, user_id=user_id, start_date=start_date, song_id=song_id)
+    db.session.add(comment)
+    try:
+
+        db.session.commit()
+        return jsonify(comment.serialize())
+    except Exception as error: 
+        db.session.rollback()
+        return jsonify({"msg": "error"}), 400
+
+
+@api.route("/comments/<int:id>", methods=["PUT"])
+def update_comment(id):
+    comment = Comment.query.get(id)
+
+    if comment:
+        body = request.json
+        content = body.get("content", None)
+        comment.content = content
+
+    try:
+        db.session.commit()
+        return jsonify(comment.serialize())
+    except Exception as error: 
+        db.session.rollback()
+        return jsonify({"msg": "error"}), 400
+        
+
+        return jsonify(comment.serialize())
+    else:
+        return jsonify({"error": "Comment not found"})
+
+
+
+@api.route("/comments/<int:id>", methods=["DELETE"])
+def delete_comment(id):
+    comment = Comment.query.get(id)
+
+    if comment:
+        db.session.delete(comment)
+        db.session.commit()
+
+        return jsonify({"message": "Comment deleted"})
+    else:
+        return jsonify({"error": "Comment not found"})
+
+
+
+@api.route("/songs")
+def get_songs():
+    songs = Song.query.all()
+    return jsonify([song.serialize() for song in songs])
+
+
+
+
+

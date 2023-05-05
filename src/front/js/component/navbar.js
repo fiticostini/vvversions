@@ -21,13 +21,14 @@ export const Navbar = () => {
 					<span className="navbar-brand mb-0 h1">VVVERSIONS</span>
 				</Link>
 				<div className="ml-auto">
-					<Link to="/register">
+				{store.token?(<button onClick={handleLogout} className="btn btn-danger text-dark">Log out</button>):(<><Link to="/register">
 						<button  disabled={location.pathname==`/register`? true : false } className={location.pathname==`/register`? "invisible" : "botonregister text-white me-3"}>  Register</button>
 					</Link>
 					<Link to="/user/login">
 						<button className="botonlogin text-white me-3">Sign In</button>
-					</Link>
-					<button onClick={handleLogout} className="btn btn-danger text-dark">Log out</button>
+					</Link></>)}
+					
+					
 				</div>
 			</div>
 		</nav>
