@@ -12,7 +12,7 @@ export const Register = () => {
     const {store, actions} = useContext(Context);
 
     const OnSubmit = async (data) => {
-       
+
     const response = await actions.registerFunction(data)
 
     if (response) {navigate("/user/login")}
@@ -96,8 +96,8 @@ export const Register = () => {
         </div>
     </div>
 
-    )
-}
+    );
+};
 
 
 
