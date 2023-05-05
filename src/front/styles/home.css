@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:wght@500&display=swap');
+
 body {
-    background-color: #efefef;
-    font-family: Courier New;
+    font-family: 'Lato', sans-serif;
+font-family: 'Montserrat', sans-serif;
 }
 
 .imagen {
@@ -122,4 +125,13 @@ a:active {
 
 .login {
     background-color: #a9a9a9;
+}
+
+.addproject {
+    width: 500px;
+    height: 500px;
+    background-color: #000000;
+    margin-top: 70px;
+    margin-left: 20px;
+    border-radius: 4px;
 }
