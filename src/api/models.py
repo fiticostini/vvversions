@@ -41,6 +41,8 @@ class Song(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', backref='song', lazy=True)
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=False)
+    project = db.relationship('Project', backref='song', lazy=True)
     version_date = db.Column(db.String(50), nullable=False)
     url = db.Column(db.String(120), nullable=False)
 
@@ -58,6 +60,27 @@ class Song(db.Model):
             "url": self.url,
             
         }
+
+
+class Project(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref='project', lazy=True)
+    
+
+    
+
+    def __repr__(self):
+        return '<Song %r>' % self.title
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "user_id": self.user_id
+            
+        }        
 
 
 

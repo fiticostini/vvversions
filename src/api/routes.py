@@ -3,10 +3,10 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Role, Comment, Song
+from api.models import db, User, Role, Comment, Song, Project
 from api.utils import generate_sitemap, APIException
 from api.firebase.firebase import Bucket
 
@@ -107,10 +107,13 @@ def get_comments():
 
 
 @api.route("/comments", methods=["POST"])
+@jwt_required()
 def create_comment():
     body = request.json
     content = body.get("content", None)
-    user_id = body.get("user_id", None)
+    user_id = get_jwt_identity()
+    print(user_id)
+    return "ok"
     start_date = body.get("start_date", None)
     song_id= body.get("song_id", None)
 
@@ -162,21 +165,47 @@ def delete_comment(id):
 
 
 
-
-
-
-
-
-
-@api.route("/songs", methods={"POST"}) 
-def create_song():
+@api.route("/songs/<int:project_id>", methods={"POST"}) 
+@jwt_required()
+def create_song(project_id):
     form = request.form
     files = request.files 
     title = form.get("title")
     gender = form.get("gender")
+    artist = form.get("artist")
     version_date = form.get("version_date")
     song = files.get("song")
+    user_data = get_jwt_identity()
+    user_id = user_data["id"]
     print(title, gender, song, version_date)
     url = Bucket.upload_file(song, song.filename)
-    print(url)
-    return "ok mi pana"
+    new_song = Song(artist=artist, title=title, gender=gender, version_date=version_date, url=url, user_id=user_id, project_id=project_id)
+   
+    db.session.add(new_song)
+    try:
+
+        db.session.commit()
+        return jsonify(new_song.serialize())
+    except Exception as error: 
+        db.session.rollback()
+        return jsonify({"msg": "error"}), 400
+
+
+@api.route("/projects", methods=["POST"])
+@jwt_required()
+def create_project():
+    body = request.json
+    title = body.get("title", None)
+    user_data = get_jwt_identity()
+    user_id = user_data["id"]
+
+    project = Project(title=title, user_id=user_id)
+    db.session.add(project)
+    try:
+
+        db.session.commit()
+        return jsonify(project.serialize())
+    except Exception as error: 
+        db.session.rollback()
+        return jsonify({"msg": "error"}), 400
+
