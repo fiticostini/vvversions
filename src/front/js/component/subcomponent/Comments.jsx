@@ -1,11 +1,7 @@
 import React from "react";
-import {getComments} from "../"
 
-const Comments = ({currentUserId}) => {
-    const [backendComments, setBackendComments] = useState([])
-    useEffect (() => {
-
-    }, [])
+const Comments = () => {
+ 
     return (
         <div>
             AQUI VA LA CAJA DE COMENTARIOS DEF

@@ -89,6 +89,7 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text, nullable=False)
     start_date = db.Column(db.String(50), nullable=False)
+    
     song_id = db.Column(db.Integer, db.ForeignKey('song.id'), nullable=False)
     song = db.relationship('Song', backref='comment', lazy=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
