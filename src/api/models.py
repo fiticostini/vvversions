@@ -18,8 +18,8 @@ class User(db.Model):
     role = db.Column(db.Enum(Role), nullable=False, default="other")
 
 
-   
-
+    
+    
     def __repr__(self):
         return '<User %r>' % self.id
 
@@ -30,7 +30,7 @@ class User(db.Model):
             "email": self.email,
             "artist_name": self.artist_name,
             "is_active": self.is_active,
-            "role": self.role,
+            "role": self.role
         }
 
 
@@ -38,6 +38,12 @@ class Song(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     gender = db.Column(db.String(80), nullable=False)
+    artist = db.Column(db.String(50), nullable=False)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref='song', lazy=True)
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=False)
+    project = db.relationship('Project', backref='song', lazy=True)
     version_date = db.Column(db.String(50), nullable=False)
     url = db.Column(db.String(120), nullable=False)
 
@@ -57,21 +63,37 @@ class Song(db.Model):
         }
 
 
+class Project(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref='project', lazy=True)
+    
+
+    
+
+    def __repr__(self):
+        return '<Song %r>' % self.title
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "user_id": self.user_id
+            
+        }        
+
+
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.String(600), nullable=False)
-    createdAt = db.Column(db.DateTime, nullable=False) #No estoy miuy seguro si Timestamp sea el tipo de dato para fechas en PostgreSQL
-    updateAt = db.Column(db.DateTime, nullable=False)
-    ad_image = db.Column(db.String(250), nullable=False)
-    
+    content = db.Column(db.Text, nullable=False)
+    start_date = db.Column(db.String(50), nullable=False)
+    song_id = db.Column(db.Integer, db.ForeignKey('song.id'), nullable=False)
+    song = db.relationship('Song', backref='comment', lazy=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    user = db.relationship('User', backref='Comment', lazy=True)
-
-    proyect_id = db.Column(db.Integer, db.ForeignKey('proyect.id'), nullable=False)
-
-
-
+    user = db.relationship('User', backref='comment', lazy=True)
+    
     
 
     def __repr__(self):
@@ -80,10 +102,9 @@ class Comment(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "text": self.text,
-            "createdAt": self.createdAt,
-            "updateAt": self.updateAt,
-            "ad_image": self.ad_image
+            "content": self.content,
+            "start_date": self.start_date,
+
         }
 
 
