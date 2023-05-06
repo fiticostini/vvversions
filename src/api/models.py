@@ -17,6 +17,7 @@ class User(db.Model):
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     role = db.Column(db.Enum(Role), nullable=False, default="other")
 
+
     
     
     def __repr__(self):
@@ -94,6 +95,7 @@ class Comment(db.Model):
     user = db.relationship('User', backref='comment', lazy=True)
     
     
+
     def __repr__(self):
         return '<Song %r>' % self.id
 
@@ -102,6 +104,7 @@ class Comment(db.Model):
             "id": self.id,
             "content": self.content,
             "start_date": self.start_date,
+
         }
 
 
