@@ -4,7 +4,7 @@ import { Context } from "../store/appContext";
 import { useNavigate, Link } from "react-router-dom";
 
 
-export const AddProject = () => {
+export const AddSong = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
 

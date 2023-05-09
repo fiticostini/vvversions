@@ -100,60 +100,89 @@ def change_password():
     return {"error": "Contrasena invalida"}
 
 
-@api.route("/comments")
-def get_comments():
-    comments = Comment.query.all()
-    return jsonify([comment.serialize() for comment in comments])
 
-
-@api.route("/comments", methods=["POST"])
+@api.route("/projects", methods=["POST"])
 @jwt_required()
-def create_comment():
+def create_project():
     body = request.json
-    content = body.get("content", None)
-    user_id = get_jwt_identity()
-    print(user_id)
-    return "ok"
-    start_date = body.get("start_date", None)
-    song_id= body.get("song_id", None)
+    title = body.get("title", None)
+    version = body.get("version", None)
+    user_data = get_jwt_identity()
+    user_id = user_data["id"]
 
-    comment = Comment(content=content, user_id=user_id, start_date=start_date, song_id=song_id)
-    db.session.add(comment)
+    project = Project(title=title, version=version, user_id=user_id)
+    db.session.add(project)
     try:
 
         db.session.commit()
-        return jsonify(comment.serialize())
+        return jsonify(project.serialize())
     except Exception as error: 
         db.session.rollback()
         return jsonify({"msg": "error"}), 400
 
 
-@api.route("/comments/<int:id>", methods=["PUT"])
-def update_comment(id):
-    comment = Comment.query.get(id)
+
+@api.route("/comments/<int:song_id>")
+@jwt_required()
+def get_comments(song_id):
+    comments = Comment.query.filter_by(song_id=song_id).all()
+ 
+    return jsonify([comment.serialize() for comment in comments])
+
+
+
+@api.route("/comments/<int:song_id>", methods=["POST"])
+@jwt_required()
+def create_comment(song_id):
+    body = request.json
+    content = body.get("content", None)
+    start_date = body.get("start_date", None)
+    user_id = get_jwt_identity()
+    print(user_id)
+    print(body)
+    
+    if content is None: 
+        return jsonify({"error": "Es necesario un contenido"}), 400
+    comment = Comment(content=content, user_id=user_id["id"], start_date=start_date, song_id=song_id)
+
+    db.session.add(comment)
+    try:
+
+        db.session.commit()
+        print(comment.serialize())
+        return jsonify({"msg": "Se agrego comentario"})
+    except Exception as error: 
+        db.session.rollback()
+        return jsonify({"msg": error.args[0]}), 400
+
+
+
+@api.route("/comments/<int:song_id>/<int:comment_id>", methods=["PUT"])
+@jwt_required()
+def update_comment(song_id, comment_id):
+    comment = Comment.query.filter_by(song_id=song_id, id=comment_id).first()
 
     if comment:
         body = request.json
         content = body.get("content", None)
         comment.content = content
 
-    try:
-        db.session.commit()
-        return jsonify(comment.serialize())
-    except Exception as error: 
-        db.session.rollback()
-        return jsonify({"msg": "error"}), 400
-        
-
-        return jsonify(comment.serialize())
+        try:
+            db.session.commit()
+            return jsonify(comment.serialize())
+        except Exception as error: 
+            db.session.rollback()
+            return jsonify({"msg": error.args[0]}), 500
+            
     else:
-        return jsonify({"error": "Comment not found"})
+        return jsonify({"error": "Comment not found"}), 404
 
 
 
-@api.route("/comments/<int:id>", methods=["DELETE"])
-def delete_comment(id):
-    comment = Comment.query.get(id)
+@api.route("/comments/<int:song_id>/<int:comment_id>", methods=["DELETE"])
+@jwt_required()
+def delete_comment(song_id, comment_id):
+    comment = Comment.query.filter_by(song_id=song_id, id=comment_id).first()
 
     if comment:
         db.session.delete(comment)
@@ -165,46 +194,60 @@ def delete_comment(id):
 
 
 
-@api.route("/songs/<int:project_id>", methods={"POST"}) 
+
+@api.route("/songs/<int:project_id>", methods=["POST", "GET"]) 
 @jwt_required()
 def create_song(project_id):
+    if request.method == "POST":
+        form = request.form
+        files = request.files 
+        title = form.get("title")
+        gender = form.get("gender")
+        artist = form.get("artist")
+        version_date = form.get("version_date")
+        song = files.get("song")
+        cover = files.get("cover")
+        user_data = get_jwt_identity()
+        user_id = user_data["id"]
+        print(title, gender, song, version_date)
+        song_url = Bucket.upload_file(song, song.filename)
+        cover_url = Bucket.upload_file(cover, cover.filename)
+        new_song = Song(artist=artist, title=title, gender=gender, version_date=version_date, song_url=song_url, cover_url=cover_url, user_id=user_id, project_id=project_id)
+    
+        db.session.add(new_song)
+        try:
+
+            db.session.commit()
+            return jsonify(new_song.serialize())
+        except Exception as error: 
+            db.session.rollback()
+            return jsonify({"msg": "error"}), 500
+    elif request.method == "GET":
+        songs = [song.serialize() for song in Song.query.all()]
+        print(songs)
+        return jsonify({"songs": songs}), 200
+
+
+
+@api.route("/cover/<int:project_id>", methods=["POST"]) 
+@jwt_required()
+def create_cover(project_id):
     form = request.form
     files = request.files 
     title = form.get("title")
-    gender = form.get("gender")
     artist = form.get("artist")
-    version_date = form.get("version_date")
-    song = files.get("song")
+    cover = files.get("cover")
     user_data = get_jwt_identity()
     user_id = user_data["id"]
-    print(title, gender, song, version_date)
-    url = Bucket.upload_file(song, song.filename)
-    new_song = Song(artist=artist, title=title, gender=gender, version_date=version_date, url=url, user_id=user_id, project_id=project_id)
+    print(title, cover, artist)
+    url = Bucket.upload_file(cover, cover.filename)
+    new_cover = Cover(artist=artist, title=title, url=url, user_id=user_id, project_id=project_id)
    
-    db.session.add(new_song)
+    db.session.add(new_cover)
     try:
 
         db.session.commit()
-        return jsonify(new_song.serialize())
-    except Exception as error: 
-        db.session.rollback()
-        return jsonify({"msg": "error"}), 400
-
-
-@api.route("/projects", methods=["POST"])
-@jwt_required()
-def create_project():
-    body = request.json
-    title = body.get("title", None)
-    user_data = get_jwt_identity()
-    user_id = user_data["id"]
-
-    project = Project(title=title, user_id=user_id)
-    db.session.add(project)
-    try:
-
-        db.session.commit()
-        return jsonify(project.serialize())
+        return jsonify(new_cover.serialize())
     except Exception as error: 
         db.session.rollback()
         return jsonify({"msg": "error"}), 400
