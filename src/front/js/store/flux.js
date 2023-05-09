@@ -3,20 +3,21 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       message: null,
       token: localStorage.getItem("token") || null,
-      artistName: "" 
+      artistName: "",
+      username: "",
+      comments: [],
     },
     actions: {
       // Use getActions to call a function within a fuction
-      loginFirst: async (email, password) => {
+
+      addComments: async(data) => {
+        
         const options = {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            email: email,
-            password: password,
-          }),
+          body: JSON.stringify(data),
         };
         try {
           const response = await fetch(
@@ -29,20 +30,80 @@ const getState = ({ getStore, getActions, setStore }) => {
             throw new Error(error.message);
           }
           const data = await response.json();
-		  console.log(data)
+          console.log(data);
           localStorage.setItem("token", data.access_token);
           setStore({ token: data.access_token });
-          setStore({ artistName: data.artist_name});
-          return true
-          
-          
+          setStore({ artistName: data.artist_name });
+          setStore({ username: data.username });
+          return true;
         } catch (error) {
           console.log(error);
-          return false
+          return false;
+        }
+
+      },
+      
+      getComments: async (song_id) => {
+        const store = getStore();
+
+        const options = {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${store.token}`,
+          },
+        };
+        try {
+          const response = await fetch(
+            `${process.env.BACKEND_URL}/api/comments/${song_id}`,
+            options
+          );
+
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
+          }
+          const data = await response.json();
+          console.log(data);
+          setStore({ comments: data });
+          return true;
+        } catch (error) {
+          console.log(error);
+          return false;
         }
       },
 
-      
+      loginFirst: async (data) => {
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        };
+        try {
+          const response = await fetch(
+            `${process.env.BACKEND_URL}/api/user/login`,
+            options
+          );
+
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
+          }
+          const data = await response.json();
+          console.log(data);
+          localStorage.setItem("token", data.access_token);
+          setStore({ token: data.access_token });
+          setStore({ artistName: data.artist_name });
+          setStore({ username: data.username });
+          return true;
+        } catch (error) {
+          console.log(error);
+          return false;
+        }
+      },
+
       registerFunction: async (data) => {
         console.log(data);
         const options = {
@@ -62,17 +123,17 @@ const getState = ({ getStore, getActions, setStore }) => {
             const error = await response.json();
             throw new Error(error.message);
           }
-          return true
+          return true;
         } catch (error) {
           console.log(error);
-          return false
+          return false;
         }
       },
 
       logout: () => {
-        localStorage.removeItem("token")
-        setStore({token:null})
-        return true
+        localStorage.removeItem("token");
+        setStore({ token: null });
+        return true;
       },
 
       exampleFunction: () => {
@@ -86,9 +147,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           isLogin: true,
         });
       },
-
-      
-      
     },
   };
 };

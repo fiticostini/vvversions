@@ -18,7 +18,10 @@ const Login = () => {
     event.preventDefault();
     console.log("me diste click");
     if (loginData.email !== "" || loginData.password != "") {
-      const response = await actions.loginFirst(loginData.email, loginData.password);
+      const response = await actions.loginFirst({
+        email: loginData.email,
+        password: loginData.password,
+      });
       console.log(response);
       if (response)  {
         navigate("/main");

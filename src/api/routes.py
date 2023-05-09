@@ -71,7 +71,7 @@ def login():
     if check_password_hash(login_user.password, password):
         token = create_access_token({"id": login_user.id})
         print(token)
-        return jsonify({"access_token": token, "artist_name": login_user.artist_name})
+        return jsonify({"access_token": token, "artist_name": login_user.artist_name, "username": login_user.username})
     else:
         return jsonify({"error": "Contrasena incorrecta"}), 401
 

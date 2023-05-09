@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: c856a578a121
+Revision ID: cf0f93f2167b
 Revises: 
-Create Date: 2023-05-06 17:29:56.799699
+Create Date: 2023-05-09 18:34:24.745493
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'c856a578a121'
+revision = 'cf0f93f2167b'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,6 +33,7 @@ def upgrade():
     op.create_table('project',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=False),
+    sa.Column('version', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -45,14 +46,15 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('project_id', sa.Integer(), nullable=False),
     sa.Column('version_date', sa.String(length=50), nullable=False),
-    sa.Column('url', sa.String(length=120), nullable=False),
+    sa.Column('song_url', sa.String(length=120), nullable=False),
+    sa.Column('cover_url', sa.String(length=240), nullable=False),
     sa.ForeignKeyConstraint(['project_id'], ['project.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('comment',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('content', sa.Text(), nullable=False),
+    sa.Column('content', sa.String(length=240), nullable=False),
     sa.Column('start_date', sa.String(length=50), nullable=False),
     sa.Column('song_id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
