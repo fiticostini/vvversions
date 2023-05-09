@@ -3,10 +3,10 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Role
+from api.models import db, User, Role, Comment, Song, Project
 from api.utils import generate_sitemap, APIException
 from api.firebase.firebase import Bucket
 
@@ -99,15 +99,156 @@ def change_password():
     
     return {"error": "Contrasena invalida"}
 
-@api.route("/songs", methods={"POST"}) 
-def create_song():
+
+
+@api.route("/projects", methods=["POST"])
+@jwt_required()
+def create_project():
+    body = request.json
+    title = body.get("title", None)
+    version = body.get("version", None)
+    user_data = get_jwt_identity()
+    user_id = user_data["id"]
+
+    project = Project(title=title, version=version, user_id=user_id)
+    db.session.add(project)
+    try:
+
+        db.session.commit()
+        return jsonify(project.serialize())
+    except Exception as error: 
+        db.session.rollback()
+        return jsonify({"msg": "error"}), 400
+
+
+
+@api.route("/comments/<int:song_id>")
+@jwt_required()
+def get_comments(song_id):
+    comments = Comment.query.filter_by(song_id=song_id).all()
+ 
+    return jsonify([comment.serialize() for comment in comments])
+
+
+
+@api.route("/comments/<int:song_id>", methods=["POST"])
+@jwt_required()
+def create_comment(song_id):
+    body = request.json
+    content = body.get("content", None)
+    start_date = body.get("start_date", None)
+    user_id = get_jwt_identity()
+    print(user_id)
+    print(body)
+    
+    if content is None: 
+        return jsonify({"error": "Es necesario un contenido"}), 400
+    comment = Comment(content=content, user_id=user_id["id"], start_date=start_date, song_id=song_id)
+
+    db.session.add(comment)
+    try:
+
+        db.session.commit()
+        print(comment.serialize())
+        return jsonify({"msg": "Se agrego comentario"})
+    except Exception as error: 
+        db.session.rollback()
+        return jsonify({"msg": error.args[0]}), 400
+
+
+
+@api.route("/comments/<int:song_id>/<int:comment_id>", methods=["PUT"])
+@jwt_required()
+def update_comment(song_id, comment_id):
+    comment = Comment.query.filter_by(song_id=song_id, id=comment_id).first()
+
+    if comment:
+        body = request.json
+        content = body.get("content", None)
+        comment.content = content
+
+        try:
+            db.session.commit()
+            return jsonify(comment.serialize())
+        except Exception as error: 
+            db.session.rollback()
+            return jsonify({"msg": error.args[0]}), 500
+            
+    else:
+        return jsonify({"error": "Comment not found"}), 404
+
+
+
+@api.route("/comments/<int:song_id>/<int:comment_id>", methods=["DELETE"])
+@jwt_required()
+def delete_comment(song_id, comment_id):
+    comment = Comment.query.filter_by(song_id=song_id, id=comment_id).first()
+
+    if comment:
+        db.session.delete(comment)
+        db.session.commit()
+
+        return jsonify({"message": "Comment deleted"})
+    else:
+        return jsonify({"error": "Comment not found"})
+
+
+
+
+@api.route("/songs/<int:project_id>", methods=["POST", "GET"]) 
+@jwt_required()
+def create_song(project_id):
+    if request.method == "POST":
+        form = request.form
+        files = request.files 
+        title = form.get("title")
+        gender = form.get("gender")
+        artist = form.get("artist")
+        version_date = form.get("version_date")
+        song = files.get("song")
+        cover = files.get("cover")
+        user_data = get_jwt_identity()
+        user_id = user_data["id"]
+        print(title, gender, song, version_date)
+        song_url = Bucket.upload_file(song, song.filename)
+        cover_url = Bucket.upload_file(cover, cover.filename)
+        new_song = Song(artist=artist, title=title, gender=gender, version_date=version_date, song_url=song_url, cover_url=cover_url, user_id=user_id, project_id=project_id)
+    
+        db.session.add(new_song)
+        try:
+
+            db.session.commit()
+            return jsonify(new_song.serialize())
+        except Exception as error: 
+            db.session.rollback()
+            return jsonify({"msg": "error"}), 500
+    elif request.method == "GET":
+        songs = [song.serialize() for song in Song.query.all()]
+        print(songs)
+        return jsonify({"songs": songs}), 200
+
+
+
+@api.route("/cover/<int:project_id>", methods=["POST"]) 
+@jwt_required()
+def create_cover(project_id):
     form = request.form
     files = request.files 
     title = form.get("title")
-    gender = form.get("gender")
-    version_date = form.get("version_date")
-    song = files.get("song")
-    print(title, gender, song, version_date)
-    url = Bucket.upload_file(song, song.filename)
-    print(url)
-    return "ok mi pana"
+    artist = form.get("artist")
+    cover = files.get("cover")
+    user_data = get_jwt_identity()
+    user_id = user_data["id"]
+    print(title, cover, artist)
+    url = Bucket.upload_file(cover, cover.filename)
+    new_cover = Cover(artist=artist, title=title, url=url, user_id=user_id, project_id=project_id)
+   
+    db.session.add(new_cover)
+    try:
+
+        db.session.commit()
+        return jsonify(new_cover.serialize())
+    except Exception as error: 
+        db.session.rollback()
+        return jsonify({"msg": "error"}), 400
+

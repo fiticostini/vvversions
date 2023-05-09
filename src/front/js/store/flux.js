@@ -42,6 +42,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      
       registerFunction: async (data) => {
         console.log(data);
         const options = {
