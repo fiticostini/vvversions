@@ -16,7 +16,6 @@ export const Navbar = () => {
 	return (
 		<nav className={location.pathname==`/register`? `invisible` : location.pathname==`/about`? `invisible`: `navbar navbarhome` }>
 			<div className="container">
-				
 				<Link to="/">
 					<span className="navbar-brand mb-0 h1">VVVERSIONS</span>
 				</Link>
