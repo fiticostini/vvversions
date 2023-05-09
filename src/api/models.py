@@ -17,6 +17,7 @@ class User(db.Model):
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     role = db.Column(db.Enum(Role), nullable=False, default="other")
 
+
     
     
     def __repr__(self):
@@ -93,12 +94,14 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(240), nullable=False)
     start_date = db.Column(db.String(50), nullable=False)
+    
     song_id = db.Column(db.Integer, db.ForeignKey('song.id'), nullable=False)
     song = db.relationship('Song', backref='comment', lazy=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', backref='comment', lazy=True)
     
     
+
     def __repr__(self):
         return '<Comment %r>' % self.id
 
@@ -108,6 +111,7 @@ class Comment(db.Model):
             "content": self.content,
             "start_date": self.start_date,
             "song_id": self.song_id
+
         }
 
 
