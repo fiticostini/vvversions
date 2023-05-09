@@ -33,6 +33,28 @@ class User(db.Model):
         }
 
 
+
+class Project(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    version = db.Column(db.Integer, nullable=False, default=1, unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref='project', lazy=True)
+    
+
+    def __repr__(self):
+        return '<Project %r>' % self.title
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "version": self.version,
+            "user_id": self.user_id
+        }     
+
+
+
 class Song(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
@@ -44,8 +66,8 @@ class Song(db.Model):
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=False)
     project = db.relationship('Project', backref='song', lazy=True)
     version_date = db.Column(db.String(50), nullable=False)
-    url = db.Column(db.String(120), nullable=False)
-
+    song_url = db.Column(db.String(120), nullable=False)
+    cover_url = db.Column(db.String(240), nullable=False)
     
 
     def __repr__(self):
@@ -56,37 +78,20 @@ class Song(db.Model):
             "id": self.id,
             "title": self.title,
             "gender": self.gender,
+            "artist": self.artist,
             "version_date": self.version_date,
-            "url": self.url,
-            
+            "song_url": self.song_url,
+            "cover_url": self.cover_url
         }
 
 
-class Project(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    user = db.relationship('User', backref='project', lazy=True)
-    
-
-    
-
-    def __repr__(self):
-        return '<Song %r>' % self.title
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "title": self.title,
-            "user_id": self.user_id
-            
-        }        
+   
 
 
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.Text, nullable=False)
+    content = db.Column(db.String(240), nullable=False)
     start_date = db.Column(db.String(50), nullable=False)
     song_id = db.Column(db.Integer, db.ForeignKey('song.id'), nullable=False)
     song = db.relationship('Song', backref='comment', lazy=True)
@@ -95,13 +100,14 @@ class Comment(db.Model):
     
     
     def __repr__(self):
-        return '<Song %r>' % self.id
+        return '<Comment %r>' % self.id
 
     def serialize(self):
         return {
             "id": self.id,
             "content": self.content,
             "start_date": self.start_date,
+            "song_id": self.song_id
         }
 
 
