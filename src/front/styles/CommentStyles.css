@@ -8,7 +8,7 @@
     line-height: 1.4;
   }
   
-  .container {
+  .container-comment {
     max-width: 1200px;
     width: calc(100vw - 4rem);
     margin: 2rem auto;

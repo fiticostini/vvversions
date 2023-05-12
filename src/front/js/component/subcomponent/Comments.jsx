@@ -63,7 +63,7 @@ const deleteComment= () => {
       </div>
       <div>
         {store.comments.length > 0 ? store.comments.map((comment) => (
-          <div key={comment.id} className="comment container">
+          <div key={comment.id} className="comment container-comment">
             <div className="header">
               <span >{comment.name}</span>
               <span className="date">{comment.start_date}</span>
