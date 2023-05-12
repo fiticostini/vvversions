@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 63bf6a75ae05
+Revision ID: fe14b2c34ed8
 Revises: 
-Create Date: 2023-05-08 23:20:06.310488
+Create Date: 2023-05-10 23:30:40.172023
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '63bf6a75ae05'
+revision = 'fe14b2c34ed8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,17 +33,19 @@ def upgrade():
     op.create_table('project',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('version', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('song',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=False),
+    sa.Column('description', sa.String(length=500), nullable=False),
     sa.Column('gender', sa.String(length=80), nullable=False),
     sa.Column('artist', sa.String(length=50), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('project_id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('project_id', sa.Integer(), nullable=True),
     sa.Column('version_date', sa.String(length=50), nullable=False),
     sa.Column('song_url', sa.String(length=120), nullable=False),
     sa.Column('cover_url', sa.String(length=240), nullable=False),
@@ -55,8 +57,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('content', sa.String(length=240), nullable=False),
     sa.Column('start_date', sa.String(length=50), nullable=False),
-    sa.Column('song_id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('song_id', sa.Integer(), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['song_id'], ['song.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
