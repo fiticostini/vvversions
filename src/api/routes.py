@@ -228,7 +228,6 @@ def create_song(project_id):
         return jsonify({"songs": songs}), 200
 
 
-
 @api.route("/cover/<int:project_id>", methods=["POST"]) 
 @jwt_required()
 def create_cover(project_id):

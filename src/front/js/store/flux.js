@@ -3,25 +3,63 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       message: null,
       token: localStorage.getItem("token") || null,
-      artistName: "",
-      username: "",
+      artistName: localStorage.getItem("artistName") || "",
+      username: localStorage.getItem("username") || "",
       comments: [],
+      song:[],
     },
     actions: {
       // Use getActions to call a function within a fuction
+      
+      getSong: async(song_id) => {
+        const store = getStore()
 
-      addComments: async(data) => {
-        
+        const options = {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${store.token}`,
+          },
+        };
+        try {
+          const response = await fetch(
+            `${process.env.BACKEND_URL}/api/songs/${song_id}`,
+            options
+          );
+
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
+          }
+          const data = await response.json();
+          console.log(data.songs);
+
+          setStore({ song: data.songs });
+
+          return true;
+        } catch (error) {
+          console.log(error);
+          return false;
+        };
+      },
+
+
+      addComments: async(commentBody, song_id) => {
+        const store = getStore();
+        const actions = getActions();
+
+        console.log(commentBody);
         const options = {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${store.token}`,
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify(commentBody),
         };
         try {
           const response = await fetch(
-            `${process.env.BACKEND_URL}/api/user/login`,
+            `${process.env.BACKEND_URL}/api/comments/${song_id}`,
             options
           );
 
@@ -31,10 +69,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
           const data = await response.json();
           console.log(data);
-          localStorage.setItem("token", data.access_token);
-          setStore({ token: data.access_token });
-          setStore({ artistName: data.artist_name });
-          setStore({ username: data.username });
+
+          setStore({ comments: data});
+          actions.getComments(song_id);
+
           return true;
         } catch (error) {
           console.log(error);
@@ -65,7 +103,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
           const data = await response.json();
           console.log(data);
+
           setStore({ comments: data });
+
           return true;
         } catch (error) {
           console.log(error);
@@ -94,9 +134,13 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await response.json();
           console.log(data);
           localStorage.setItem("token", data.access_token);
+          localStorage.setItem("artistName", data.artist_name)
+          localStorage.setItem("username", data.username)
+
           setStore({ token: data.access_token });
           setStore({ artistName: data.artist_name });
           setStore({ username: data.username });
+
           return true;
         } catch (error) {
           console.log(error);
@@ -132,7 +176,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       logout: () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("artistName");
+        localStorage.removeItem("username");
         setStore({ token: null });
+        setStore({artistName : ""});
+        setStore({username: ""});
         return true;
       },
 

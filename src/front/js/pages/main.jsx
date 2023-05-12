@@ -8,6 +8,7 @@ export const Main = () => {
   return (
     <div className="p-5">
       <h1>{store.artistName}</h1>
+      <h1>{store.username}</h1>
       <div className="container sticky-top"></div>
     </div>
   );

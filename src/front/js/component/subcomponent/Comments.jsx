@@ -3,41 +3,53 @@ import { Context } from "../../store/appContext";
 import "../../../styles/CommentStyles.css";
 import { useParams } from "react-router-dom";
 
-const dummyComments = [];
+// const dummyComments = [];
 
 const Comments = () => {
-  const { store, actions } = useContext(Context);
-  const [comments, setComments] = useState(dummyComments); // In our real application, dummyComments will be coming from our API
+  // const [comments, setComments] = useState(dummyComments); // In our real application, dummyComments will be coming from our API
   const [commentBody, setCommentBody] = useState("");
-
+  const { store, actions } = useContext(Context);
+  const [error, setError] = useState("");
 
   const params = useParams();
-  console.log(params)
+  console.log(params);
 
   const handleCommentChange = (event) => {
     setCommentBody(event.target.value);
   };
 
   const onComment = (event) => {
-    if (commentBody.trim()) {
-      const newComment = {
-        content : commentBody,
-      };
-
-      const newComments = [...comments, newComment];
-      setComments(newComments); // en vez de llamar al set comments, llamar a la funcion en el flux para nadir el comentario
+    if (commentBody !== "") {
+      actions.addComments(
+        {
+          content: commentBody,
+          start_date: "10/5/2023",
+        },
+        params.id
+      );
+      // const newComments = [...comments, newComment];
+      // setComments(newComments); // en vez de llamar al set comments, llamar a la funcion en el flux para nadir el comentario
       setCommentBody(""); // Este dejarlo
+      setError("");
+    } else {
+      setError("No puedes comentar vacio")
     }
   };
 
-  useEffect( () =>{
-    actions.getComments(params.id)
+  console.log(store.username)
 
-  }, [])
+const deleteComment= () => {
+  
+};
+
+  useEffect(() => {
+    actions.getComments(params.id);
+  }, []);
 
   return (
     <div className="container">
       <span>React Nested Comments</span>
+      <div>{error !=="" && <span>Llene el comentario</span>}</div>
       <div className="comment-form-row">
         <input
           value={commentBody}
@@ -50,19 +62,33 @@ const Comments = () => {
         </button>
       </div>
       <div>
-        {store.comments.map((comment) => (
-          <div className="comment container">{comment.content}</div>
-        ))}
+        {store.comments.length > 0 ? store.comments.map((comment) => (
+          <div key={comment.id} className="comment container">
+            <div className="header">
+              <span >{comment.name}</span>
+              <span className="date">{comment.start_date}</span>
+            </div>
+            <div className="message">{comment.content}</div>
+
+          </div>
+        ))
+        :<div className="spinner-border text-primary" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>}
       </div>
 
       <h3>MODELO DE COMENTARIO:</h3>
+      <i className="fal fa-trash"></i>
       <div className="comment container">
         <div className="header">
-          <span className="name">{store.username}</span>
+          <span>{store.username}</span>
           <span className="date">5/9/2023</span>
         </div>
-        <div className="message">Tremenda cancion</div>
-        <div className="footer"></div>
+        <div className="message">Tremenda cancion
+        </div>
+        <div className="footer">
+        
+        </div>
       </div>
     </div>
   );

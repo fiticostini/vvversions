@@ -109,6 +109,7 @@ class Comment(db.Model):
         return {
             "id": self.id,
             "content": self.content,
+            "name": self.user.username,
             "start_date": self.start_date,
             "song_id": self.song_id
 
