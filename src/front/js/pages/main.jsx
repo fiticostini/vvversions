@@ -16,13 +16,10 @@ useEffect(() => {
 
 
   return (
-    <div className="p-5 text-center">
-      <ProyectRevision />
-     
+    <div className="p-5">
       <h1>{store.artistName}</h1>
-      <div className="container sticky-top">
-        
-      </div>
+      <h1>{store.username}</h1>
+      <div className="container sticky-top"></div>
     </div>
   );
 };

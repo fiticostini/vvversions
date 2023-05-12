@@ -71,7 +71,7 @@ def login():
     if check_password_hash(login_user.password, password):
         token = create_access_token({"id": login_user.id})
         print(token)
-        return jsonify({"access_token": token, "artist_name": login_user.artist_name})
+        return jsonify({"access_token": token, "artist_name": login_user.artist_name, "username": login_user.username})
     else:
         return jsonify({"error": "Contrasena incorrecta"}), 401
 
@@ -248,8 +248,6 @@ def create_song(project_id):
         songs = [song.serialize() for song in Song.query.all()]
         print(songs)
         return jsonify({"songs": songs}), 200
-
-
 
 @api.route("/songs/<int:project_id>", methods=["DELETE"])
 @jwt_required()

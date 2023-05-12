@@ -1,12 +1,19 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import "../../../styles/MusicPlayer.css";
+import { Context } from "../../store/appContext";
 import WaveSurfer from "wavesurfer.js";
+import { useParams } from "react-router-dom";
+
 
 const MusicPlayer = () => {
   // State
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState("00:00");
   const [currentTime, setCurrentTime] = useState(0);
+  const { store, actions } = useContext(Context);
+
+  //
+  const params = useParams();
 
   // References
   const musicPlayer = useRef(); // We use this and useRef to grab our audio easier.
@@ -62,7 +69,7 @@ const MusicPlayer = () => {
     // It will call "whilePlaying" again at the end of this function. And since we're still asigning it to the animationRef we set up, pausing it will stop it.
   };
 
-  // To sumarize, the "changeRange" function  is updating the musicPlayer based on the range slider. Then it's calling the "changePalyerCurrentTime" which
+  // To summarize, the "changeRange" function  is updating the musicPlayer based on the range slider. Then it's calling the "changePalyerCurrentTime" which
   // updates the style and then state.
   const changeRange = () => {
     musicPlayer.current.currentTime = progressBar.current.value; // We are updating the range slider and telling the music player to jump wherever the range slider is.
@@ -103,20 +110,27 @@ const MusicPlayer = () => {
   //   );
   // }, []);
 
+  const song = store.song.find(element => element.id == params.id)
+
+  useEffect(()=> {
+    actions.getSong(params.id)
+    console.log(store.song)
+  }, [])
+
   return (
     <div className="musicPlayerStyle">
       <div>El SoundWave Pattern deberia ir aqui</div>
       {/* <div id="waveform">El Wave Surfer deberia de ir aqui</div> */}
       <audio
         ref={musicPlayer} // Here we connect to our useRef hook
-        src="https://storage.googleapis.com/vvversions-proyect.appspot.com/guitarsound.mp3"
+        src={song?.song_url} //
         onLoadedMetadata={loadedMusicMetadata}
         // preload={metadata} va de la mano con el useEffect
       ></audio>
 
       {/* Backward 5 seconds */}
       <button className="forwardBackward" onClick={backFive}>
-        <i class="fas fa-long-arrow-left"></i> 5
+        <i className="fas fa-long-arrow-left"></i> 5
       </button>
 
       {/* Play and Pause botton */}
