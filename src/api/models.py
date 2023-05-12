@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import backref
 import enum
 
 db = SQLAlchemy()
@@ -18,8 +19,6 @@ class User(db.Model):
     role = db.Column(db.Enum(Role), nullable=False, default="other")
 
 
-    
-    
     def __repr__(self):
         return '<User %r>' % self.id
 
@@ -39,7 +38,7 @@ class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     version = db.Column(db.Integer, nullable=False, default=1)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     user = db.relationship('User', backref='project', lazy=True)
     
 
@@ -59,13 +58,14 @@ class Project(db.Model):
 class Song(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(500), nullable=False)
     gender = db.Column(db.String(80), nullable=False)
     artist = db.Column(db.String(50), nullable=False)
 
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     user = db.relationship('User', backref='song', lazy=True)
-    project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=False)
-    project = db.relationship('Project', backref='song', lazy=True)
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=True)
+    project = db.relationship('Project', backref=backref('songs', cascade="all,delete-orphan"), lazy=True)
     version_date = db.Column(db.String(50), nullable=False)
     song_url = db.Column(db.String(120), nullable=False)
     cover_url = db.Column(db.String(240), nullable=False)
@@ -78,6 +78,7 @@ class Song(db.Model):
         return {
             "id": self.id,
             "title": self.title,
+            "description": self.description,
             "gender": self.gender,
             "artist": self.artist,
             "version_date": self.version_date,
@@ -85,23 +86,15 @@ class Song(db.Model):
             "cover_url": self.cover_url
         }
 
-
-   
-
-
-
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(240), nullable=False)
     start_date = db.Column(db.String(50), nullable=False)
-    
-    song_id = db.Column(db.Integer, db.ForeignKey('song.id'), nullable=False)
-    song = db.relationship('Song', backref='comment', lazy=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    song_id = db.Column(db.Integer, db.ForeignKey('song.id'), nullable=True)
+    song = db.relationship('Song', backref=backref('comments', cascade="all,delete-orphan"), lazy=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     user = db.relationship('User', backref='comment', lazy=True)
     
-    
-
     def __repr__(self):
         return '<Comment %r>' % self.id
 

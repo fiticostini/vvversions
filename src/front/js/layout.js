@@ -14,6 +14,10 @@ import { Navbar } from "./component/navbar";
 import Login from "./pages/login";
 import { AddSong } from "./pages/addsong.jsx";
 import { SongRevision } from "./pages/SongRevision.jsx";
+import { ProjectInput } from "./pages/projectinput.jsx";
+import {  Revisions } from "./pages/revisions.jsx";
+
+
 
 //create your first component
 const Layout = () => {
@@ -37,6 +41,9 @@ const Layout = () => {
                         <Route element={<Main />} path="/main" />
                         <Route element={<AddSong />} path="/addsong" />
                         <Route element={<SongRevision/>} path="/songrevision/:id"/>
+                        <Route element={<ProjectInput />} path="/projectinput" />
+                        <Route element={<Revisions />} path="/revisions" />
+
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                 </ScrollToTop>

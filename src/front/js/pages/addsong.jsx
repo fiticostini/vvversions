@@ -10,28 +10,20 @@ export const AddSong = () => {
 
     const OnSubmit = (songs) => {
         console.log(songs)
-
     }
-    return (<div className="d-flex justify-content-center">
-        
+    return (<div className="d-flex justify-content-center">   
+    <div className=""><Link to="/projectinput"><i className=" fa text-dark logoback p-3">BACK</i></Link></div> 
         <div className="form-group">
         <div className="addproject p-3 ">
             <form onSubmit={handleSubmit(OnSubmit)}>
-                <h2 className="text-center text-white p-3 mt-3">Add Song</h2>
+                <h2 className="text-center text-white p-3 mt-3">Add Files</h2>
                 <div>
-                    <div className="p-1">
-                        <input className="form-control" type="text" {...register(`songtitle`, {
-                            required: true,
-                            maxLength: 20
-                        })} placeholder="song title">
-                        </input>
-                        {errors.username?.type === `required` && <p className="text-danger">el campo es requerido</p>}
-                        {errors.username?.type === `maxLength` && <p className="text-danger">20 caracteres máximo</p>}
-                    </div>
                     <div className="p-1">
                         <input className="form-control" type="file" {...register(`soundfile`, {
                             required: true
                         })} placeholder="Add Mp3/Wav file">
+                            
+                            
                         </input>
                         {errors.email?.type === `required` && <p className="text-danger">El Campo es Requerido</p>}
                     </div>

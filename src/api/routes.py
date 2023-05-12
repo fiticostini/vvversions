@@ -122,6 +122,27 @@ def create_project():
 
 
 
+@api.route("/project/<int:id>", methods=["DELETE"])
+@jwt_required()
+def delete_project(id):
+    
+    project = Project.query.filter_by(id=id).first()
+    print(project)
+    if project is not None:
+        try:
+            db.session.delete(project)
+            db.session.commit()
+            return jsonify({"msg": f"Project nro {project.id} ha sido eliminado"})
+        except Exception as error: 
+            db.session.rollback()
+            return jsonify({"msg": error.args[0]}), 500    
+            
+    else:
+        return jsonify({"error": "Proyecto no encontrado"})
+
+
+
+
 @api.route("/comments/<int:song_id>")
 @jwt_required()
 def get_comments(song_id):
@@ -202,6 +223,7 @@ def create_song(project_id):
         form = request.form
         files = request.files 
         title = form.get("title")
+        description = form.get("description")
         gender = form.get("gender")
         artist = form.get("artist")
         version_date = form.get("version_date")
@@ -212,7 +234,7 @@ def create_song(project_id):
         print(title, gender, song, version_date)
         song_url = Bucket.upload_file(song, song.filename)
         cover_url = Bucket.upload_file(cover, cover.filename)
-        new_song = Song(artist=artist, title=title, gender=gender, version_date=version_date, song_url=song_url, cover_url=cover_url, user_id=user_id, project_id=project_id)
+        new_song = Song(artist=artist, title=title, description=description, gender=gender, version_date=version_date, song_url=song_url, cover_url=cover_url, user_id=user_id, project_id=project_id)
     
         db.session.add(new_song)
         try:
@@ -227,27 +249,15 @@ def create_song(project_id):
         print(songs)
         return jsonify({"songs": songs}), 200
 
-
-@api.route("/cover/<int:project_id>", methods=["POST"]) 
+@api.route("/songs/<int:project_id>", methods=["DELETE"])
 @jwt_required()
-def create_cover(project_id):
-    form = request.form
-    files = request.files 
-    title = form.get("title")
-    artist = form.get("artist")
-    cover = files.get("cover")
-    user_data = get_jwt_identity()
-    user_id = user_data["id"]
-    print(title, cover, artist)
-    url = Bucket.upload_file(cover, cover.filename)
-    new_cover = Cover(artist=artist, title=title, url=url, user_id=user_id, project_id=project_id)
-   
-    db.session.add(new_cover)
-    try:
+def delete_song(project_id):
+    song = Song.query.filter_by(project_id=project_id).first()
 
+    if song:
+        db.session.delete(song)
         db.session.commit()
-        return jsonify(new_cover.serialize())
-    except Exception as error: 
-        db.session.rollback()
-        return jsonify({"msg": "error"}), 400
 
+        return jsonify({"message": "Song deleted"})
+    else:
+        return jsonify({"error": "Song not found"})
