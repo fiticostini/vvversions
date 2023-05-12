@@ -3,7 +3,7 @@
 
 body {
     font-family: 'Lato', sans-serif;
-font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .imagen {
@@ -64,7 +64,7 @@ font-family: 'Montserrat', sans-serif;
 .footer {
     background-color: #ffffff;
     opacity: 0;
-    
+
 }
 
 a:link,
@@ -105,11 +105,11 @@ a:active {
 .about {
     width: 1300px;
     height: 600px;
-    background-color: #CCEAF4;
+    background-color: #ffadfa;
 }
 
 .botondisabled {
-    pointer-events: none; 
+    pointer-events: none;
     opacity: .0;
     Cursor: default;
 }
@@ -135,3 +135,100 @@ a:active {
     margin-left: 20px;
     border-radius: 4px;
 }
+
+.projectimage {
+    width: 157px;
+    height: 157px;
+    padding: 5%;
+}
+
+.projectname {
+    margin-top: 28px;
+}
+
+.projectcontainer {
+    background-color: #feffcd;
+    border-radius: 5px;
+}
+
+.placeholder {
+
+    border-radius: 3px;
+    width: 300px;
+    height: 33px;
+    border-color: #000000;
+    text-align: center;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+.date {
+    font-size: 13px;
+}
+
+.version {
+    font-size: 13px;
+    border-radius: 3px;
+}
+
+.addfiles {
+    font-size: 13px;
+    background-color: #CCEAF4;
+}
+
+.titlesong {
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+input::placeholder {
+    font-weight: bold;
+    opacity: 1;
+    color: rgb(33, 30, 30);
+    font-size: small;
+    border-color: #000000;
+}
+
+.button-container{
+    display:inline-block;
+    position:relative;
+    }
+    
+    .button-container a{
+    position: absolute;
+    bottom:4em;
+    right:4em;
+    background-color:#8F0005;
+    border-radius:1.5em;
+    color:white;
+    text-transform:uppercase;
+    padding:1em 1.5em;
+    }
+
+    .coveralbum {
+        margin-top: 10px;
+        width: 120px;
+        height: 120px;
+        gap: 5px;
+    }
+
+    .newversion {
+        font-size: 10px;
+        background-color: #ff8d8d;
+        margin-right: 20px;
+    }
+
+    .openbutton {
+        font-size: 10px;
+        background-color: #b5f175;
+    }
+
+    .fas {
+        font-size: 13px;
+    }
+
+    .aboutme {
+        background-color: #000000;
+        width: 500px;
+        height: 100px;
+        text-decoration-color:  #ffadfa;
+    }
