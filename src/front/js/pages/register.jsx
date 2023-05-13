@@ -76,7 +76,6 @@ export const Register = () => {
                     </div>
                 </div>
             </form>
-
         </div>
         <div className="publicity container text-center">
             <div id="carouselExampleAutoplaying" className="carousel slide p-5 text-dark mt-5" data-bs-ride="carousel">

@@ -23,7 +23,7 @@ export const ProjectInput = () => {
   };
 
   const handleClick = () => {
-    navigate ('/dashboard');
+    navigate ('/revisions');
   };
 
   const navigate = useNavigate()
@@ -41,7 +41,7 @@ export const ProjectInput = () => {
       />
       <button className='btn btn-outline-dark version' onClick={addProject}>add a project</button>
       {projects.map((project, index) => (
-        <div className='container d-flex projectcontainer border my-3 col-8 justify-content-between'>
+        <div className='container d-flex projectcontainer border my-3 col-8 justify-content-between text-white'>
           <div className='d-flex'>
             <div> <img src={addimage} className="projectimage ms-2" ></img> </div>
             <div >
