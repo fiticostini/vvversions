@@ -21,12 +21,12 @@ export const ProjectInput = () => {
       setInputValue('');
     }
   };
-  const removeProject = (index) => {
-    setProjects(projects.filter((_, i) => i !== index));
-  };
+  // const removeProject = (index) => {
+  //   setProjects(projects.filter((_, i) => i !== index));
+  // };
 
-  const handleClick = () => {
-    navigate ('/revisions');
+  const handleClick = (id) => {
+    navigate (`/revisions/${id}`);
   };
 
   const navigate = useNavigate()
@@ -63,8 +63,8 @@ export const ProjectInput = () => {
             <div className="">
 
               <Link to={`/addsong/${project.id}`}>  <div className='mt-1'><button type="button" className='addfiles btn btn-outline-dark'>add files</button></div> </Link>
-              <div className='mt-1 text-end'><button type="button" className='btn btn-outline-dark openbutton' onClick={handleClick} >open</button></div>
-              <button className="fas fa-trash border border-0 bg-transparent text-center" onClick={() => removeProject(index)}></button>
+              <div className='mt-1 text-end'><button type="button" className='btn btn-outline-dark openbutton' onClick={() => handleClick(project.id)} >open</button></div>
+              <button className="fas fa-trash border border-0 bg-transparent text-center" onClick={() => actions.deleteProject(project.id)}></button>
             </div>
           </div>
         </div>

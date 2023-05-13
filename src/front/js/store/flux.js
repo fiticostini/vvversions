@@ -253,8 +253,19 @@ const getState = ({ getStore, getActions, setStore }) => {
             const error = await response.json();
             throw new Error(error.message);
           }
-          
-          setStore({...store, projects:data.projects})
+          let projects = []
+          for (let project of data.projects) {
+            console.log(project)
+            const songResponse = await fetch (`${process.env.BACKEND_URL}/api/songs/${project.id}`, {
+              headers:{
+                authorization:`Bearer ${store.token}`
+              }
+            })
+            const songData = await songResponse.json()
+            projects.push({...project, songs: songData.songs})
+          }
+          setStore({...store, projects:projects})
+          console.log(project)
           return true;
         } catch (error) {
           console.log(error);
@@ -287,6 +298,62 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
           getActions().getProject();
           return true;
+        } catch (error) {
+          console.log(error);
+          return false;
+        }
+      },
+
+      deleteProject: async (id) => {
+
+        const store = getStore();
+        const options = {
+          method: "DELETE",
+          headers: {
+           "Content-Type": "application/json",
+           authorization: `Bearer ${store.token}`
+          },
+         };
+         try {
+          const response = await fetch(
+            `${process.env.BACKEND_URL}/api/project/${id}`,
+            options
+          );
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
+          }
+          getActions().getProject();
+          return true;
+          
+        } catch (error) {
+          console.log(error);
+          return false;
+        }
+      },
+
+      deleteSong: async (id) => {
+
+        const store = getStore();
+        const options = {
+          method: "DELETE",
+          headers: {
+           "Content-Type": "application/json",
+           authorization: `Bearer ${store.token}`
+          },
+         };
+         try {
+          const response = await fetch(
+            `${process.env.BACKEND_URL}/api/songs/${id}`,
+            options
+          );
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
+          }
+          getActions().getProject();
+          return true;
+          
         } catch (error) {
           console.log(error);
           return false;

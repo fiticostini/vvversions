@@ -109,13 +109,17 @@ const MusicPlayer = () => {
   //     "https://storage.googleapis.com/vvversions-proyect.appspot.com/guitarsound.mp3"
   //   );
   // }, []);
+  const [song, setSong] = useState();
+  //const song = store.song.find(element => element.id == params.id)
 
-  const song = store.song.find(element => element.id == params.id)
-
-  useEffect(()=> {
-    actions.getSong(params.id)
-    console.log(store.song)
-  }, [])
+  useEffect (() => {
+    if (store.projects.length == 0) return
+    const project = store.projects.find((project) => params.projectid == project.id)
+    const currentSong = project.songs.find((song) => params.songid == song.id)
+    setSong(currentSong)
+    console.log(currentSong);
+    
+},[store.projects])
 
   return (
     <div className="musicPlayerStyle">
@@ -164,6 +168,7 @@ const MusicPlayer = () => {
       <div className="durationStyle">
         {duration && !isNaN(duration) && calculateTime(duration)}
       </div>
+      <div>{song && song.description}</div>
     </div>
   );
 };

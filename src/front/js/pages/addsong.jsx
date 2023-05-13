@@ -6,13 +6,17 @@ import { useNavigate, Link, useParams } from "react-router-dom";
 
 export const AddSong = () => {
     const params = useParams();
+    const navigate = useNavigate()
 
     const {store, actions} = useContext(Context);
 
     const { register, formState: { errors }, handleSubmit } = useForm();
 
-    const OnSubmit = (songs) => {
-        actions.createSong(songs, params.id)
+    const OnSubmit = async (songs) => {
+        const response = await actions.createSong(songs, params.id)
+        if (response) {
+            navigate(`/revisions/${params.id}`)
+        }
     }
     return (<div className="d-flex justify-content-center">   
     <div className=""><Link to="/projectinput"><i className=" fa text-dark logoback p-3">BACK</i></Link></div> 

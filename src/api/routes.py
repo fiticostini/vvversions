@@ -237,11 +237,15 @@ def create_song(project_id):
         cover = files.get("cover")
         user_data = get_jwt_identity()
         user_id = user_data["id"]
-        print(song, cover)
-        song_url = Bucket.upload_file(song, title)
+        #print(song, cover)
+        song_url = Bucket.upload_file(song, title+"song")
         cover_url = Bucket.upload_file(cover, title)
         new_song = Song(artist=artist, title=title, description=description, gender=gender, version_date=version_date, song_url=song_url, cover_url=cover_url, user_id=user_id, project_id=project_id)
     
+        project = Project.query.filter_by(id=project_id).first()
+        print("******************************************")
+        print(project)
+        print("******************************************")
         db.session.add(new_song)
         try:
 
@@ -256,11 +260,15 @@ def create_song(project_id):
         print(songs)
         return jsonify({"songs": songs}), 200
 
-@api.route("/songs/<int:project_id>", methods=["DELETE"])
+@api.route("/songs/<int:song_id>", methods=["DELETE"])
 @jwt_required()
-def delete_song(project_id):
-    song = Song.query.filter_by(project_id=project_id).first()
-
+def delete_song(song_id):
+    print("******************************************")
+    print(song_id)
+    print("******************************************")
+    song = Song.query.filter_by(id=song_id).first()
+    print(song)
+    print("******************************************")
     if song:
         db.session.delete(song)
         db.session.commit()
