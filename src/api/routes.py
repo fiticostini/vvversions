@@ -99,8 +99,14 @@ def change_password():
     
     return {"error": "Contrasena invalida"}
 
-
-
+@api.route("/projects", methods=["GET"])
+@jwt_required()
+def get_project():
+    user_data = get_jwt_identity()
+    user_id = user_data["id"]
+    projects = Project.query.filter_by(user_id=user_id).all()
+    return jsonify({"projects": [project.serialize() for project in projects]})
+    
 @api.route("/projects", methods=["POST"])
 @jwt_required()
 def create_project():
@@ -231,11 +237,15 @@ def create_song(project_id):
         cover = files.get("cover")
         user_data = get_jwt_identity()
         user_id = user_data["id"]
-        print(title, gender, song, version_date)
-        song_url = Bucket.upload_file(song, song.filename)
-        cover_url = Bucket.upload_file(cover, cover.filename)
+        #print(song, cover)
+        song_url = Bucket.upload_file(song, title+"song")
+        cover_url = Bucket.upload_file(cover, title)
         new_song = Song(artist=artist, title=title, description=description, gender=gender, version_date=version_date, song_url=song_url, cover_url=cover_url, user_id=user_id, project_id=project_id)
     
+        project = Project.query.filter_by(id=project_id).first()
+        print("******************************************")
+        print(project)
+        print("******************************************")
         db.session.add(new_song)
         try:
 
@@ -243,17 +253,22 @@ def create_song(project_id):
             return jsonify(new_song.serialize())
         except Exception as error: 
             db.session.rollback()
+            print(error)
             return jsonify({"msg": "error"}), 500
     elif request.method == "GET":
-        songs = [song.serialize() for song in Song.query.all()]
+        songs = [song.serialize() for song in Song.query.filter_by(project_id=project_id).all()]
         print(songs)
         return jsonify({"songs": songs}), 200
 
-@api.route("/songs/<int:project_id>", methods=["DELETE"])
+@api.route("/songs/<int:song_id>", methods=["DELETE"])
 @jwt_required()
-def delete_song(project_id):
-    song = Song.query.filter_by(project_id=project_id).first()
-
+def delete_song(song_id):
+    print("******************************************")
+    print(song_id)
+    print("******************************************")
+    song = Song.query.filter_by(id=song_id).first()
+    print(song)
+    print("******************************************")
     if song:
         db.session.delete(song)
         db.session.commit()
