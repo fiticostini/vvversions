@@ -99,8 +99,14 @@ def change_password():
     
     return {"error": "Contrasena invalida"}
 
-
-
+@api.route("/projects", methods=["GET"])
+@jwt_required()
+def get_project():
+    user_data = get_jwt_identity()
+    user_id = user_data["id"]
+    projects = Project.query.filter_by(user_id=user_id).all()
+    return jsonify({"projects": [project.serialize() for project in projects]})
+    
 @api.route("/projects", methods=["POST"])
 @jwt_required()
 def create_project():

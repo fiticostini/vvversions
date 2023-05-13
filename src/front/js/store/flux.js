@@ -7,6 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       username: localStorage.getItem("username") || "",
       comments: [],
       song:[],
+      projects: [],
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -195,8 +196,106 @@ const getState = ({ getStore, getActions, setStore }) => {
           isLogin: true,
         });
       },
+
+      createSong: async (data, project_id) => {
+        console.log(data, project_id);
+        console.log(data.soundfile[0]);
+        const store = getStore();
+        const formData = new FormData();
+        formData.append("title", data.title)
+        formData.append("artist", data.artist)
+        formData.append("description", data.description)
+        formData.append("gender", data.gender)
+        formData.append("version_date", data.version_date)
+        formData.append("song", data.soundfile[0])
+        formData.append("image", data.imagefile[0])
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "multipart/form-data",
+            authorization: `Bearer ${store.token}` 
+          },
+          body: formData,
+        };
+        try {
+          const response = await fetch(
+            `${process.env.BACKEND_URL}/api/songs/${project_id}`,
+            options
+          );
+
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
+          }
+          getActions().getProject();
+          return true;
+        } catch (error) {
+          console.log(error);
+          return false;
+        }
+
+      },
+
+      getProject: async () => {
+        const store = getStore();
+
+        try {
+          const response = await fetch(
+            `${process.env.BACKEND_URL}/api/projects`,
+            {headers: {
+              "Content-Type": "application/json",
+              authorization: `Bearer ${store.token}` 
+            },}
+          );
+          const data = await response.json();
+          console.log(data);
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
+          }
+          setStore({...store, projects:data.projects})
+          return true;
+        } catch (error) {
+          console.log(error);
+          return false;
+        }
+      },
+
+
+      createProject: async (data) => {
+        console.log(data);
+        const store = getStore();
+        const body = {...data, version:1}
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${store.token}` 
+          },
+          body: JSON.stringify(body),
+        };
+        try {
+          const response = await fetch(
+            `${process.env.BACKEND_URL}/api/projects`,
+            options
+          );
+
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
+          }
+          getActions().getProject();
+          return true;
+        } catch (error) {
+          console.log(error);
+          return false;
+        }
+      },
+
     },
   };
 };
+
+
 
 export default getState;
