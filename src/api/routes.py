@@ -237,9 +237,9 @@ def create_song(project_id):
         cover = files.get("cover")
         user_data = get_jwt_identity()
         user_id = user_data["id"]
-        print(title, gender, song, version_date)
-        song_url = Bucket.upload_file(song, song.filename)
-        cover_url = Bucket.upload_file(cover, cover.filename)
+        print(song, cover)
+        song_url = Bucket.upload_file(song, title)
+        cover_url = Bucket.upload_file(cover, title)
         new_song = Song(artist=artist, title=title, description=description, gender=gender, version_date=version_date, song_url=song_url, cover_url=cover_url, user_id=user_id, project_id=project_id)
     
         db.session.add(new_song)
@@ -249,9 +249,10 @@ def create_song(project_id):
             return jsonify(new_song.serialize())
         except Exception as error: 
             db.session.rollback()
+            print(error)
             return jsonify({"msg": "error"}), 500
     elif request.method == "GET":
-        songs = [song.serialize() for song in Song.query.all()]
+        songs = [song.serialize() for song in Song.query.filter_by(project_id=project_id).all()]
         print(songs)
         return jsonify({"songs": songs}), 200
 

@@ -208,11 +208,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         formData.append("gender", data.gender)
         formData.append("version_date", data.version_date)
         formData.append("song", data.soundfile[0])
-        formData.append("image", data.imagefile[0])
+        formData.append("cover", data.imagefile[0])
         const options = {
           method: "POST",
           headers: {
-            "Content-Type": "multipart/form-data",
+            
             authorization: `Bearer ${store.token}` 
           },
           body: formData,
@@ -253,6 +253,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             const error = await response.json();
             throw new Error(error.message);
           }
+          
           setStore({...store, projects:data.projects})
           return true;
         } catch (error) {
