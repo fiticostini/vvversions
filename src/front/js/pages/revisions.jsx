@@ -24,27 +24,37 @@ export function Revisions() {
     },[store.projects])
     return (
         <div>
-            <h1 className='text-center'>Revisions {project && project.title}</h1>
-            <button onClick={handleClick} className='ms-5 btn btn-outline-dark version'>Add Revision </button>
+            <h1 className='text-center mt-4'>Revisions of {project && project.title}</h1>
+            <button onClick={handleClick} className='ms-5 btn btn-outline-dark version text-end'>Add Revision </button>
             <div>
                 {project && project.songs.map((song) => (
-                    <div>
-                        <div className='container d-flex projectcontainer border my-2 col-8 justify-content-between'>
-                            <div> <img src={song.cover_url} className="projectimage ms-2" ></img>
-                            </div>
-                            <div className="text-start"><h2 className='projectname'> {song.title} </h2></div>
-                            <div>
-                                <div className='text-end'>{}</div></div>
-                                <div className="">
-
-                            <div className='mt-1 text-end'><button type="button" className='btn btn-outline-dark openbutton' onClick={() => goToSong(song.id)} >open</button></div>
-                            <button className="fas fa-trash border border-0 bg-transparent text-center" onClick={() => actions.deleteSong(song.id)}></button>
+                    <div className='container d-flex projectcontainer my-3 col-8 justify-content-between'>
+                    <div className='d-flex'>
+                      <div> <img src={song.cover_url} className="projectimage ms-2" ></img> </div>
+                      <div >
+                        <div className="text-start"><h2 className='projectname'>{project.title} </h2></div>
+                        <div>
+                          <div className='text-start titlesong'>title song </div>
                         </div>
+                        <div className=''>
+                          
                         </div>
-                        
+                      </div>
                     </div>
+                    <div className='text-end me-4'>
+                      <div className='text-end date'> <p>date DD/MM/YY </p> </div>
+                      <div className='version'><p>version {project.version} </p></div>
+                      <div className="">
+          
+                        
+                        <div className='mt-1 text-end'><button type="button" className='btn btn-outline-dark openbutton' onClick={() => goToSong(song.id)}  >open song</button></div>
+                        <button className="deleteproject text-danger" onClick={() => actions.deleteSong(song.id)}>delete song</button>
+                      </div>
+                    </div>
+                  </div>
                 ))}
             </div>
+            <div className=""><Link to="/projectinput"><p className="back2 p-2">BACK</p></Link></div>
         </div>
     );
 }
