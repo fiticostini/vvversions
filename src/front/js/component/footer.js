@@ -22,7 +22,7 @@ export const Footer = () => (
 
       <img src={cover6} className="coveralbum ms-1"></img>
     </div>
-    <div><h2>do you believe in your music?</h2></div>
+    <div><h3 className="mt-2">do you really believe in your music?</h3></div>
     <div>
       <p className="fs-6 mt-2 me-5">
         <Link to="/about">about us</Link>

@@ -25,7 +25,7 @@ const Comments = () => {
           content: commentBody,
           start_date: "10/5/2023",
         },
-        params.id
+        params.songid
       );
       // const newComments = [...comments, newComment];
       // setComments(newComments); // en vez de llamar al set comments, llamar a la funcion en el flux para nadir el comentario

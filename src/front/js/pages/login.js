@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import VVVERSIONSLOGONEGROMOBILE from "../../img/VVVERSIONSLOGONEGROMOBILE.png";
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -35,8 +37,11 @@ const Login = () => {
     if (store.token && store.token !== null ) navigate("/projectinput")
   }, [store.token])
   return (
-    <div className="container col-4 border login border-black p-5 mt-5">
-      <h1 className="text-center">Sign In</h1>
+    <div>
+    
+    <div className="d-flex justify-content-center">
+    <div className="container col-4  login p-5 text-center">
+      <h1 className="text-center text-white">Sign In</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
@@ -68,11 +73,20 @@ const Login = () => {
           />
         </div>
 <div className="text-center">
-        <button type="submit" className="btn btn-primary ">
+        <button type="submit" className="text-white submit">
           Login
         </button>
+       
         </div>
+       
       </form>
+      
+    </div>
+  
+   
+    </div>
+    <div className=""><Link to="/"><img src={VVVERSIONSLOGONEGROMOBILE} className="back2 p-2"></img></Link></div>
+   
     </div>
   );
 };
