@@ -24,7 +24,7 @@ const Login = () => {
       });
       console.log(response);
       if (response)  {
-        navigate("/main");
+        navigate("/projectinput");
       } else {
         alert("Credenciales invalidas");
       }
@@ -32,7 +32,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (store.token && store.token !== null ) navigate("/main")
+    if (store.token && store.token !== null ) navigate("/projectinput")
   }, [store.token])
   return (
     <div className="container col-4 border login border-black p-5 mt-5">
