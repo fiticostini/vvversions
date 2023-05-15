@@ -279,7 +279,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       createProject: async (data) => {
         console.log(data);
         const store = getStore();
-        const body = {...data, version:1}
+        const body = {...data, version:1, version_date:todayDate()}
         const options = {
           method: "POST",
           headers: {
