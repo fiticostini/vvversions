@@ -1,15 +1,14 @@
 import React from "react";
 
 
-const Comment = () => {
+export const Comment = () => {
     
 
 
     return (
         <div>
-            AQUI VA LA CAJA DE COMENTARIOS
+             <div className="col-8 border bg-white">{song && song.description}</div>
         </div>
     );
 };
 
-export default Comment

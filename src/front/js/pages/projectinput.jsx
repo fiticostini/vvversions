@@ -38,7 +38,7 @@ export const ProjectInput = () => {
       <div><div className=""><Link to="/"><img src={VVVERSIONSLOGONEGROMOBILE} className="back2 p-2"></img></Link></div></div>
     
   
-     <p className='text-end artistheader text-black me-5 mt-2 fs-1'>{store.artistName}</p>
+     <p className='text-end artistheader text-black me-5 mt-2 fs-2'>{store.artistName}</p>
      </div>
     <div className=' p-5 text-center'>
       <input
@@ -46,9 +46,9 @@ export const ProjectInput = () => {
         placeholder="    name"
         value={inputValue}
         onChange={handleInputChange}
-        className='placeholder bg-white me-2'
+        className='placeholder2 me-2'
       />
-      <button className='btn btn-outline-dark version' onClick={addProject}>add a project</button>
+      <button className='btn version' onClick={addProject}>add a project</button>
       {store.projects.map((project, index) => (
         <div className='container d-flex projectcontainer my-3 col-8 justify-content-between'>
           <div className='d-flex'>

@@ -112,64 +112,76 @@ const MusicPlayer = () => {
   const [song, setSong] = useState();
   //const song = store.song.find(element => element.id == params.id)
 
-  useEffect (() => {
+  useEffect(() => {
     if (store.projects.length == 0) return
     const project = store.projects.find((project) => params.projectid == project.id)
     const currentSong = project.songs.find((song) => params.songid == song.id)
     setSong(currentSong)
     console.log(currentSong);
-    
-},[store.projects])
+
+  }, [store.projects])
 
   return (
-    <div className="musicPlayerStyle">
-      <div>El SoundWave Pattern deberia ir aqui</div>
-      {/* <div id="waveform">El Wave Surfer deberia de ir aqui</div> */}
-      <audio
-        ref={musicPlayer} // Here we connect to our useRef hook
-        src={song?.song_url} //
-        onLoadedMetadata={loadedMusicMetadata}
+    <div>
+    <div className="d-flex">
+      <div className="musicPlayerStyle">
+        <div>El SoundWave Pattern deberia ir aqui</div>
+        {/* <div id="waveform">El Wave Surfer deberia de ir aqui</div> */}
+        <audio
+          ref={musicPlayer} // Here we connect to our useRef hook
+          src={song?.song_url} //
+          onLoadedMetadata={loadedMusicMetadata}
         // preload={metadata} va de la mano con el useEffect
-      ></audio>
+        ></audio>
 
-      {/* Backward 5 seconds */}
-      <button className="forwardBackward" onClick={backFive}>
-        <i className="fas fa-long-arrow-left"></i> 5
-      </button>
+        {/* Backward 5 seconds */}
+        <button className="forwardBackward" onClick={backFive}>
+          <i className="fas fa-long-arrow-left"></i> 5
+        </button>
 
-      {/* Play and Pause botton */}
-      <button className="playPause" onClick={togglePlayPause}>
-        {isPlaying ? (
-          <i className="fas fa-pause"></i>
-        ) : (
-          <i className="fas fa-play play"></i>
-        )}
-      </button>
+        {/* Play and Pause botton */}
+        <button className="playPause" onClick={togglePlayPause}>
+          {isPlaying ? (
+            <i className="fas fa-pause"></i>
+          ) : (
+            <i className="fas fa-play play"></i>
+          )}
+        </button>
 
-      {/* Forward 5 seconds */}
-      <button className="forwardBackward" onClick={forwardFive}>
-        5 <i className="fas fa-long-arrow-right"></i>
-      </button>
+        {/* Forward 5 seconds */}
+        <button className="forwardBackward" onClick={forwardFive}>
+          5 <i className="fas fa-long-arrow-right"></i>
+        </button>
 
-      {/*Current time*/}
-      <div className="currenTimeStyle">{calculateTime(currentTime)}</div>
+        {/*Current time*/}
+        <div className="currenTimeStyle ">{calculateTime(currentTime)}</div>
 
-      {/*Progress Bar*/}
-      <div>
-        <input
-          type="range"
-          defaultValue="0"
-          ref={progressBar}
-          onChange={changeRange}
-          className="progressBarStyle"
-        ></input>
+        {/*Progress Bar*/}
+        <div>
+          <input
+            type="range"
+            defaultValue="0"
+            ref={progressBar}
+            onChange={changeRange}
+            className="progressBarStyle"
+          ></input>
+        </div>
+        {/*Duration*/}
+        <div className="durationStyle">
+          {duration && !isNaN(duration) && calculateTime(duration)}
+        </div>
+
       </div>
-      {/*Duration*/}
-      <div className="durationStyle">
-        {duration && !isNaN(duration) && calculateTime(duration)}
-      </div>
-      <div>{song && song.description}</div>
+      
+      
     </div>
+    <div className="p-5 d-flex commentsbyartist">
+    <div className="justify-content-center fs-6">{song && song.description}</div>
+    </div>
+    </div>
+    
+    
+    
   );
 };
 
