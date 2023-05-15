@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import ProyectRevision from "../component/ProyectRevision.jsx";
+import VVVERSIONSLOGONEGRO from "../../img/VVVERSIONSLOGONEGRO.png";
 
 
 export const SongRevision = () => {
@@ -10,8 +11,10 @@ export const SongRevision = () => {
       <h3>{store.artistName}</h3>
       
       <ProyectRevision />
+
       
-      <div className="">
+      <div className="text-center">
+        <img src={VVVERSIONSLOGONEGRO} className="col-2"></img>
         
       </div>
     </div>

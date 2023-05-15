@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, Link, useParams } from "react-router-dom";
 import { Context } from '../store/appContext';
+import VVVERSIONSLOGONEGRO from "../../img/VVVERSIONSLOGONEGRO.png";
 
 export function Revisions() {
     const [divs, setDivs] = useState([]);
@@ -23,7 +24,7 @@ export function Revisions() {
     },[store.projects])
     return (
         <div>
-            <i><h3 className='text-center mt-4'>Revisions of {project && project.title}</h3></i>
+            <i><h3 className='text-center mt-5 text-dark'>Revisions of {project && project.title}</h3></i>
             <button onClick={handleClick} className='ms-5 btn btn-outline-dark version text-end'>Add Revision </button>
             <div>
                 {project && project.songs.map((song) => (
@@ -53,8 +54,12 @@ export function Revisions() {
                   </div>
                 ))}
             </div>
-            <div className=""><Link to="/projectinput"><p className="back2 p-2">BACK</p></Link></div>
+            <div className='d-flex'>
+            <div className=""><Link to="/projectinput"><p className="back2 p-2">BACK</p></Link></div> 
+            <div> <img src={VVVERSIONSLOGONEGRO} className="col-2 ms-5"></img></div>
+            </div>
         </div>
+        
     );
 }
 

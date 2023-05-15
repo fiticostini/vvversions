@@ -49,14 +49,14 @@ const deleteComment= () => {
   return (
 
     <div className="container">
-      <span>add your comment</span>
+     <div className="p-3"> <i>add your comment</i></div>
       <div>{error !=="" && <span>Llene el comentario</span>}</div>
       <div className="comment-form-row">
         <input
           value={commentBody}
           onChange={(event) => handleCommentChange(event)}
           className="message-input"
-          placeholder="what do you think of this song?"
+          placeholder="   what do you think of this song?"
         ></input>
         <button onClick={(event) => onComment(event)} className="btn">
           Comment
@@ -64,12 +64,13 @@ const deleteComment= () => {
       </div>
       <div>
         {store.comments.length > 0 ? store.comments.map((comment) => (
-          <div key={comment.id} className="comment container">
-            <div className="header">
-              <span >{comment.name}</span>
+          <div key={comment.id} className="comment container bg-white text-start my-1">
+            <div className="header mt-1 ms-2">
+            <span >{comment.name}</span>
               <span className="date">{comment.start_date}</span>
+              
             </div>
-            <div className="message">{comment.content}</div>
+            <div className="message mb-2">{comment.content}</div>
 
           </div>
         ))
@@ -78,19 +79,19 @@ const deleteComment= () => {
       </div>}
       </div>
 
-      <p className="mt-3">Comments</p>
+      <p className="mt-1 bg-white"></p>
       
-      <div className="comment container bg-light">
-        <div className="header">
+     
+        <div className="header bg-white">
           
-          <span className="date"></span>
+          <span className="date bg-white"></span>
         </div>
         <div className="message">
         </div>
         <div className="footer">
         
         </div>
-      </div>
+      
     </div>
   );
 };
