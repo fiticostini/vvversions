@@ -122,6 +122,7 @@ const MusicPlayer = () => {
 },[store.projects])
 
   return (
+    <div>
     <div className="musicPlayerStyle">
       <div>El SoundWave Pattern deberia ir aqui</div>
       {/* <div id="waveform">El Wave Surfer deberia de ir aqui</div> */}
@@ -168,7 +169,8 @@ const MusicPlayer = () => {
       <div className="durationStyle">
         {duration && !isNaN(duration) && calculateTime(duration)}
       </div>
-      <div>{song && song.description}</div>
+    </div>
+    <div>{song && song.description}</div>
     </div>
   );
 };
