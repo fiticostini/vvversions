@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import addimage from "../../img/addimage.png";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import { Context } from '../store/appContext';
 
@@ -24,7 +23,7 @@ export function Revisions() {
     },[store.projects])
     return (
         <div>
-            <h1 className='text-center mt-4'>Revisions of {project && project.title}</h1>
+            <i><h3 className='text-center mt-4'>Revisions of {project && project.title}</h3></i>
             <button onClick={handleClick} className='ms-5 btn btn-outline-dark version text-end'>Add Revision </button>
             <div>
                 {project && project.songs.map((song) => (
@@ -47,8 +46,8 @@ export function Revisions() {
                       <div className="">
           
                         
-                        <div className='mt-1 text-end'><button type="button" className='btn btn-outline-dark openbutton' onClick={() => goToSong(song.id)}  >open song</button></div>
-                        <button className="deleteproject text-danger" onClick={() => actions.deleteSong(song.id)}>delete song</button>
+                        <div className='mt-1 text-end'><button type="button" className='btn btn-outline-dark openbutton2' onClick={() => goToSong(song.id)}  >Go Song</button></div>
+                        <button className="deleteproject2 text-danger" onClick={() => actions.deleteSong(song.id)}>delete song</button>
                       </div>
                     </div>
                   </div>
