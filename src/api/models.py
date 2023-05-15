@@ -61,12 +61,12 @@ class Song(db.Model):
     description = db.Column(db.String(500), nullable=False)
     gender = db.Column(db.String(80), nullable=False)
     artist = db.Column(db.String(50), nullable=False)
+    version_date = db.Column(db.String(50), nullable=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     user = db.relationship('User', backref='song', lazy=True)
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=True)
     project = db.relationship('Project', backref=backref('songs', cascade="all,delete-orphan"), lazy=True)
-    version_date = db.Column(db.String(50), nullable=False)
     song_url = db.Column(db.String(120), nullable=False)
     cover_url = db.Column(db.String(240), nullable=False)
     

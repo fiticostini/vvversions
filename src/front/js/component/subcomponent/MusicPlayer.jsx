@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import "../../../styles/MusicPlayer.css";
 import { Context } from "../../store/appContext";
-import WaveSurfer from "wavesurfer.js";
 import { useParams } from "react-router-dom";
+import soundwave2 from "../../../img/soundwave2.png";
 
 
 const MusicPlayer = () => {
@@ -125,7 +125,7 @@ const MusicPlayer = () => {
     <div>
     <div className="d-flex">
       <div className="musicPlayerStyle">
-        <div>El SoundWave Pattern deberia ir aqui</div>
+        <div ><img src={soundwave2} className="soundwavelogo"></img></div>
         {/* <div id="waveform">El Wave Surfer deberia de ir aqui</div> */}
         <audio
           ref={musicPlayer} // Here we connect to our useRef hook
@@ -176,7 +176,7 @@ const MusicPlayer = () => {
       
     </div>
     <div className="p-5 d-flex commentsbyartist">
-    <div className="justify-content-center fs-6">{song && song.description}</div>
+    <div className="justify-content-center fs-5">{song && song.description}</div>
     </div>
     </div>
     

@@ -50,7 +50,7 @@ body {
     font-family: Courier New;
     color: #ffffff;
     font-size: 13px;
-    padding: 6px;
+    padding-top: 14px;
     text-decoration: none;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
@@ -61,7 +61,7 @@ body {
     text-shadow: 1px 1px 3px #ffffff;
     border: dotted #ffffff 0px;
     background: #000000;
-    padding: 12px;
+    
 }
 
 .footer {
@@ -311,7 +311,8 @@ input::placeholder {
         font-family: Courier New;
         color: #ff0000;
         font-size: 15px;
-        padding: 6px;
+        padding-top: 12px;
+        margin-left: 2px;
         text-decoration: none;
         -webkit-border-radius: 0px;
         -moz-border-radius: 0px;
@@ -322,7 +323,7 @@ input::placeholder {
         text-shadow: 1px 1px 3px #ff0000;
         border: dotted #ffffff 0px;
         background: #000000;
-        padding: 12px;
+        
 
     }
 
@@ -341,11 +342,17 @@ input::placeholder {
     }
 
     .commentsbyartist {
-        background-color: #e6bdbd;
+       display: flex;
+       justify-content: center;
         border-radius: 9px;
         margin-top: 10px;
         margin-bottom: 10px;
-        border-style: double;
-        border-width: 7px;
-        border-color: #d4d0d0;
+        
+        height: 150px;
+        width: 1270px;
+    }
+
+    .soundwavelogo {
+        width: 300px;
+        margin-left: 300px;
     }

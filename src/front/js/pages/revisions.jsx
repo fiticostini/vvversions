@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
-import addimage from "../../img/addimage.png";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import { Context } from '../store/appContext';
+import VVVERSIONSLOGONEGRO from "../../img/VVVERSIONSLOGONEGRO.png";
 
 export function Revisions() {
     const [divs, setDivs] = useState([]);
@@ -9,6 +9,9 @@ export function Revisions() {
     const {store, actions} = useContext(Context)
     const params = useParams()
     const navigate = useNavigate()
+
+    const [version, setVersion] = useState(0)
+    console.log(version);
 
     const handleClick = () => {
         navigate(`/addsong/${params.id}`)
@@ -21,13 +24,14 @@ export function Revisions() {
         const project = store.projects.find((project) => params.id == project.id)
         console.log(project);
         setProject(project)
+      
     },[store.projects])
     return (
         <div>
-            <i><h3 className='text-center mt-4'>Revisions of {project && project.title}</h3></i>
+            <i><h3 className='text-center mt-5 text-dark'>Revisions of {project && project.title}</h3></i>
             <button onClick={handleClick} className='ms-5 btn btn-outline-dark version text-end'>Add Revision </button>
             <div>
-                {project && project.songs.map((song) => (
+                {project && project.songs.map((song, index) => (
                     <div className='container d-flex projectcontainer my-3 col-8 justify-content-between'>
                     <div className='d-flex'>
                       <div> <img src={song.cover_url} className="projectimage ms-2" ></img> </div>
@@ -42,8 +46,8 @@ export function Revisions() {
                       </div>
                     </div>
                     <div className='text-end me-4'>
-                      <div className='text-end date'> <p>date DD/MM/YY </p> </div>
-                      <div className='version'><p>version {project.version} </p></div>
+                      <div className='text-end date'> <p>date {song.version_date} </p> </div>
+                      <div className='version'><p>version {project.version}.{index} </p></div>
                       <div className="">
           
                         
@@ -54,8 +58,12 @@ export function Revisions() {
                   </div>
                 ))}
             </div>
-            <div className=""><Link to="/projectinput"><p className="back2 p-2">BACK</p></Link></div>
+            <div className='d-flex'>
+            <div className=""><Link to="/projectinput"><p className="back2 p-2">BACK</p></Link></div> 
+            <div> <img src={VVVERSIONSLOGONEGRO} className="col-2 ms-5"></img></div>
+            </div>
         </div>
+        
     );
 }
 
