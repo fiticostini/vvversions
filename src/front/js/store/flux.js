@@ -265,7 +265,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             projects.push({...project, songs: songData.songs})
           }
           setStore({...store, projects:projects})
-          console.log(project)
+          console.log(projects)
           return true;
         } catch (error) {
           console.log(error);
