@@ -70,13 +70,13 @@ export const AddSong = () => {
                         })} placeholder="add title about this project">
                         </input>
                     </div>
-                        <div className="p-1">
+                        {/* <div className="p-1">
                         <input className="form-control" type="text" {...register(`version_date`, {
                             required: true
                         })} placeholder="add version_date about this project">
                         </input>
                         {errors.artist_name?.type === `required` && <p className="text-danger">El Campo es Requerido</p>}
-                    </div>
+                    </div> */}
                     <div className="text-center p-3">
                         <input className="submit text-white" type="submit" value="submit"></input>
                     </div>

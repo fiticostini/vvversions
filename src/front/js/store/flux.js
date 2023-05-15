@@ -1,3 +1,5 @@
+import { todayDate } from "../utils/todaydate";
+
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -206,7 +208,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         formData.append("artist", data.artist)
         formData.append("description", data.description)
         formData.append("gender", data.gender)
-        formData.append("version_date", data.version_date)
+        formData.append("version_date", todayDate())
         formData.append("song", data.soundfile[0])
         formData.append("cover", data.imagefile[0])
         const options = {
