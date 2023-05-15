@@ -49,15 +49,16 @@ const deleteComment= () => {
   }, []);
 
   return (
+
     <div className="container">
-      <span>React Nested Comments</span>
+      <span>add your comment</span>
       <div>{error !=="" && <span>Llene el comentario</span>}</div>
       <div className="comment-form-row">
         <input
           value={commentBody}
           onChange={(event) => handleCommentChange(event)}
           className="message-input"
-          placeholder="What are your thoughts?"
+          placeholder="what do you think of this song?"
         ></input>
         <button onClick={(event) => onComment(event)} className="btn">
           Comment
@@ -79,14 +80,14 @@ const deleteComment= () => {
       </div>}
       </div>
 
-      <h3>MODELO DE COMENTARIO:</h3>
-      <i className="fal fa-trash"></i>
-      <div className="comment container">
+      <p>Comments</p>
+      
+      <div className="comment container bg-white">
         <div className="header">
-          <span>{store.username}</span>
-          <span className="date">5/9/2023</span>
+          
+          <span className="date"></span>
         </div>
-        <div className="message">Tremenda cancion
+        <div className="message">
         </div>
         <div className="footer">
         

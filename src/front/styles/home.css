@@ -87,11 +87,7 @@ a:active {
       margin:103px;
       margin-right: 70px;
       margin-left: 20px;
-      
-      backdrop-filter: blur(10px);
-      background: rgba(0, 0, 0, 0.8);
-      opacity: 70px;
- 
+      background-color: #000000;
   
 }
 
@@ -123,8 +119,9 @@ a:active {
 
 .about {
     width: 1300px;
-    height: 600px;
-    background-color: #ffadfa;
+    height: 700px;
+    background-color: #9ee2eefc;
+    margin-top: 50px;
 }
 
 .botondisabled {
@@ -153,10 +150,7 @@ a:active {
       margin:103px;
       margin-right: 70px;
       margin-left: 20px;
-      
-      backdrop-filter: blur(10px);
-      background: rgba(0, 0, 0, 0.8);
-      opacity: 70px;
+     background-color: #000000;
  
 }
 
@@ -194,13 +188,15 @@ a:active {
 
 }
 
-.placeholder {
+.placeholder2 {
     border-radius: 3px;
     width: 300px;
     height: 33px;
-    border-color: #000000;
+    border-color: #454343;
     text-align: center;
-    border: 1px solid rgb(0, 0, 0);
+    border: 1px solid rgb(92, 91, 91);
+    background-color: #ffffff;
+    border-radius: 7px;
 }
 
 .date {
@@ -267,20 +263,18 @@ input::placeholder {
         
     }
 
-   
-
     .deleteproject {
         border: 0px;
         background-color: #ffffff;
     }
 
-    .aboutme {
-        background-color: #000000;
-        width: 500px;
-        height: 100px;
-        text-decoration-color:  #ffadfa;
+    .deleteproject2 {
+        margin-top: 28px;
+        border: 0px;
+        background-color: #ffffff;
     }
 
+   
     .back {
         margin-top: 690px;
         margin-left: 100px;
@@ -335,4 +329,23 @@ input::placeholder {
     .back2 {
         width: 100px;
         margin-left: 60px;
+    }
+
+    .aboutmetxt {
+        font-weight: 700;
+    }
+
+    .openbutton2 {
+        width: 100px;
+        height: 50px;
+    }
+
+    .commentsbyartist {
+        background-color: #e6bdbd;
+        border-radius: 9px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border-style: double;
+        border-width: 7px;
+        border-color: #d4d0d0;
     }
