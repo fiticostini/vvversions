@@ -24,7 +24,7 @@ export const Footer = () => (
     </div>
     <div><h3 className="mt-2">do you really believe in your music?</h3></div>
     <div>
-      <p className="fs-6 mt-2 me-5">
+      <p className="aboutlink">
         <Link to="/about">about us</Link>
       </p>
     </div>

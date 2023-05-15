@@ -5,7 +5,7 @@
 body {
     font-family: 'Lato', sans-serif;
     font-family: 'Montserrat', sans-serif;
-    background-color:#ffe4e4
+    background-color: #ffe4e4
 }
 
 .imagen {
@@ -51,6 +51,7 @@ body {
     color: #ffffff;
     font-size: 13px;
     padding-top: 14px;
+    margin-left: 50px;
     text-decoration: none;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
@@ -61,7 +62,7 @@ body {
     text-shadow: 1px 1px 3px #ffffff;
     border: dotted #ffffff 0px;
     background: #000000;
-    
+
 }
 
 .footer {
@@ -79,16 +80,16 @@ a:active {
 .form {
     @import url(https://fonts.googleapis.com/css?family=Gudea:400,700);
 
-    
-      perspective:800px;
-      width: 500px;
-      height: 499px;
-      border-radius: 10px;
-      margin:103px;
-      margin-right: 70px;
-      margin-left: 20px;
-      background-color: #000000;
-  
+
+    perspective: 800px;
+    width: 500px;
+    height: 499px;
+    border-radius: 10px;
+    margin: 103px;
+    margin-right: 70px;
+    margin-left: 20px;
+    background-color: #000000;
+
 }
 
 .publicity {
@@ -97,13 +98,12 @@ a:active {
     background-color: #ffffff;
     margin-top: 95px;
     margin-left: 150px;
-    
+
     border-radius: 20px;
-    
+
     border-style: double;
     border-width: 7px;
     border-color: #d4d0d0;
-
 }
 
 
@@ -114,7 +114,6 @@ a:active {
     border-radius: 4px;
     width: 100px;
     height: 40px;
-
 }
 
 .about {
@@ -140,23 +139,20 @@ a:active {
 }
 
 .login {
-    @import url(https://fonts.googleapis.com/css?family=Gudea:400,700);
+    perspective: 800px;
+    width: 500px;
+    height: 499px;
+    border-radius: 10px;
+    margin: 103px;
+    margin-right: 70px;
+    margin-left: 20px;
+    background-color: #000000;
 
-    
-      perspective:800px;
-      width: 500px;
-      height: 499px;
-      border-radius: 10px;
-      margin:103px;
-      margin-right: 70px;
-      margin-left: 20px;
-     background-color: #000000;
- 
 }
 
 .addproject {
     width: 500px;
-    height: 500px;
+    height: 700px;
     background-color: #000000;
     margin-top: 70px;
     margin-left: 20px;
@@ -175,7 +171,7 @@ a:active {
     margin-left: 20px;
     font-weight: 700;
     font-size: 40px;
-   
+
 }
 
 .projectcontainer {
@@ -206,7 +202,7 @@ a:active {
 
 .version {
     font-size: 14px;
-    
+
     ;
 }
 
@@ -229,130 +225,140 @@ input::placeholder {
     border-color: #000000;
 }
 
-.button-container{
-    display:inline-block;
-    position:relative;
-    }
-    
-    .button-container a{
+.button-container {
+    display: inline-block;
+    position: relative;
+}
+
+.button-container a {
     position: absolute;
-    bottom:4em;
-    right:4em;
-    background-color:#8F0005;
-    border-radius:1.5em;
-    color:white;
-    text-transform:uppercase;
-    padding:1em 1.5em;
-    }
+    bottom: 4em;
+    right: 4em;
+    background-color: #8F0005;
+    border-radius: 1.5em;
+    color: white;
+    text-transform: uppercase;
+    padding: 1em 1.5em;
+}
 
-    .coveralbum {
-        margin-top: 10px;
-        width: 80px;
-        height: 80px;
-        gap: 5px;
-    }
+.coveralbum {
+    margin-top: 10px;
+    width: 80px;
+    height: 80px;
+    gap: 5px;
+}
 
-    .newversion {
-        font-size: 14px;
-        background-color: #3e8d14;
-        border-radius: 6px;
-        margin-right: 130px;
-        margin-left: 20px;
-        margin-top:  55px;
-        border-color: #ffffff;
-        
-    }
+.newversion {
+    font-size: 14px;
+    background-color: #3e8d14;
+    border-radius: 6px;
+    margin-right: 130px;
+    margin-left: 18px;
+    margin-top: 61px;
+    border-color: #ffffff;
 
-    .deleteproject {
-        border: 0px;
-        background-color: #ffffff;
-    }
+}
 
-    .deleteproject2 {
-        margin-top: 28px;
-        border: 0px;
-        background-color: #ffffff;
-    }
+.deleteproject {
+    margin-top: 07px;
+    border: 0px;
+    background-color: #ffffff;
+}
 
-   
-    .back {
-        margin-top: 690px;
-        margin-left: 100px;
-        width: 100px;
-    }
+.deleteproject2 {
+    margin-top: 28px;
+    border: 0px;
+    background-color: #ffffff;
+}
 
-    .titlesong2 {
-        margin-top: 85px;
-        margin-left: 20px;
-    }
 
-    .projectname2 {
-        margin-top: 24px;
-        margin-right: 50px;
-        margin-left: 1px;
-        font-weight: 700;
-        font-size: 40px;
-    }
+.back {
+    margin-top: 690px;
+    margin-left: 100px;
+    width: 100px;
+}
 
-    .artistheader {
-        font-style: unset;
-    }
+.titlesong2 {
+    margin-top: 85px;
+    margin-left: 20px;
+}
 
-    .artistdecal {
-        font-size: 14px;
-        margin-top: 19px;
-    }
+.projectname2 {
+    margin-top: 24px;
+    margin-right: 50px;
+    margin-left: 1px;
+    font-weight: 700;
+    font-size: 40px;
+}
 
-    .member {
-     border-color: #a9a9a9;
-    }
+.artistheader {
+    font-style: unset;
+}
 
-    .botonlogout {
-        font-family: Courier New;
-        color: #ff0000;
-        font-size: 15px;
-        padding-top: 12px;
-        margin-left: 2px;
-        text-decoration: none;
-        -webkit-border-radius: 0px;
-        -moz-border-radius: 0px;
-        border-radius: 5px;
-        -webkit-box-shadow: 0px 0px 0px #666666;
-        -moz-box-shadow: 0px 0px 0px #666666;
-        box-shadow: 0px 0px 0px #666666;
-        text-shadow: 1px 1px 3px #ff0000;
-        border: dotted #ffffff 0px;
-        background: #000000;
-        
+.artistdecal {
+    font-size: 14px;
+    margin-top: 19px;
+}
 
-    }
+.member {
+    border-color: #a9a9a9;
+}
 
-    .back2 {
-        width: 100px;
-        margin-left: 60px;
-    }
+.botonlogout {
+    font-family: Courier New;
+    color: #ff0000;
+    font-size: 15px;
+    padding-top: 12px;
+    margin-left: 33px;
+    text-decoration: none;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 0px #666666;
+    -moz-box-shadow: 0px 0px 0px #666666;
+    box-shadow: 0px 0px 0px #666666;
+    text-shadow: 1px 1px 3px #ff0000;
+    border: dotted #ffffff 0px;
+    background: #000000;
 
-    .aboutmetxt {
-        font-weight: 700;
-    }
 
-    .openbutton2 {
-        width: 100px;
-        height: 50px;
-    }
+}
 
-    .commentsbyartist {
-       display: flex;
-       justify-content: center;
-        border-radius: 9px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        
-        height: 150px;
-        width: 1270px;
-    }
+.back2 {
+    width: 100px;
+    margin-left: 60px;
+}
 
-    .soundwavelogo {
-        width: 300px;
-        margin-left: 300px;
-    }
+.aboutmetxt {
+    font-weight: 700;
+}
+
+.openbutton2 {
+    width: 100px;
+    height: 50px;
+}
+
+.commentsbyartist {
+    display: flex;
+    justify-content: center;
+    border-radius: 9px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    height: 150px;
+    width: 1270px;
+}
+
+.soundwavelogo {
+    width: 300px;
+    margin-left: 300px;
+}
+
+.openbutton {
+    margin-top: 5px;
+}
+
+.aboutlink {
+    margin-right: 77px;
+    margin-top: 24px;
+}

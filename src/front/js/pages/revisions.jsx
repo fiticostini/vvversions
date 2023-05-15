@@ -49,8 +49,6 @@ export function Revisions() {
                       <div className='text-end date'> <p>date {song.version_date} </p> </div>
                       <div className='version'><p>version {project.version}.{index} </p></div>
                       <div className="">
-          
-                        
                         <div className='mt-1 text-end'><button type="button" className='btn btn-outline-dark openbutton2' onClick={() => goToSong(song.id)}  >Go Song</button></div>
                         <button className="deleteproject2 text-danger" onClick={() => actions.deleteSong(song.id)}>delete song</button>
                       </div>

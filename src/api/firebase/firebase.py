@@ -3,7 +3,7 @@ from .firebase_settings import FIREBASE_CONFIG
 
 cred = credentials.Certificate(FIREBASE_CONFIG)
 
-firebase_app = initialize_app(credential=cred, options={"storageBucket": "vvversion-a22d5.appspot.com"})
+firebase_app = initialize_app(credential=cred, options={"storageBucket": "vvversions-proyect.appspot.com"})
 
 
 class FirebaseBucket: 
