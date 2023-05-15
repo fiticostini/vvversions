@@ -8,14 +8,14 @@
     line-height: 1.4;
   }
   
-  .containercomment {
+  .container-comment {
     max-width: 1200px;
     width: calc(100vw - 4rem);
     margin: 2rem auto;
   }
   
-  button {
- 
+  .button-comment {
+  color: white;
   }
   
   .error-msg {

@@ -39,8 +39,8 @@ class Project(db.Model):
     title = db.Column(db.String(100), nullable=False)
     version = db.Column(db.Integer, nullable=False, default=1)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    version_date = db.Column(db.String(50), nullable=False)
     user = db.relationship('User', backref='project', lazy=True)
-    
 
     def __repr__(self):
         return '<Project %r>' % self.title
@@ -50,8 +50,23 @@ class Project(db.Model):
             "id": self.id,
             "title": self.title,
             "version": self.version,
-            "user_id": self.user_id
-        }     
+            "user_id": self.user_id,
+            "version_date": self.version_date
+        } 
+
+
+    @classmethod
+    def create(cls,prj):
+        try:
+            new_prj = cls(**prj)
+            db.session.add(new_prj)
+            db.session.commit()
+            return new_prj
+        except Exception as error:
+            db.session.rollback();
+            print(error)
+            return None;
+        
 
 
 

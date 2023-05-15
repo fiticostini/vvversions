@@ -52,7 +52,8 @@ export const ProjectInput = () => {
       {store.projects.map((project, index) => (
         <div className='container d-flex projectcontainer my-3 col-8 justify-content-between'>
           <div className='d-flex'>
-            <div> <img src={addimage} className="projectimage ms-2" ></img> </div>
+          <div>  <img src={project.songs.length > 0 ? project.songs[project.songs.length - 1].cover_url : addimage} className="projectimage ms-2" ></img>
+          </div>
             <div >
               <div className="text-start"><h2 className='projectname'>{project.title} </h2></div>
               <div>
@@ -64,7 +65,7 @@ export const ProjectInput = () => {
             </div>
           </div>
           <div className='text-end me-4'>
-            <div className='text-end date'> <p>date DD/MM/YY </p> </div>
+            <div className='text-end date'> <p>{project.version_date}</p> </div>
             <div className='version'><p>version {project.version} </p></div>
             <div>
               <Link to={`/addsong/${project.id}`}>  <div className='mt-1'><button type="button" className='addfiles btn btn-outline-dark'>add files</button></div> </Link>
