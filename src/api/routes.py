@@ -111,20 +111,13 @@ def get_project():
 @jwt_required()
 def create_project():
     body = request.json
-    title = body.get("title", None)
-    version = body.get("version", None)
     user_data = get_jwt_identity()
-    user_id = user_data["id"]
+    body["user_id"] = user_data["id"]
 
-    project = Project(title=title, version=version, user_id=user_id)
-    db.session.add(project)
-    try:
-
-        db.session.commit()
-        return jsonify(project.serialize())
-    except Exception as error: 
-        db.session.rollback()
-        return jsonify({"msg": "error"}), 400
+    project = Project.create(body)
+    if project is not None:
+        return jsonify({"msg": project.serialize()}), 201
+    return jsonify({"msg": "ocurrio un error"}), 500
 
 
 
