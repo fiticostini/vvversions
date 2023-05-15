@@ -19,6 +19,9 @@ const Comments = () => {
   };
 
   const onComment = (event) => {
+
+
+
     if (commentBody !== "") {
       actions.addComments(
         {
@@ -26,7 +29,6 @@ const Comments = () => {
           start_date: "10/5/2023",
         },
         params.songid,
-        params.projectid
       );
       // const newComments = [...comments, newComment];
       // setComments(newComments); // en vez de llamar al set comments, llamar a la funcion en el flux para nadir el comentario
@@ -44,9 +46,20 @@ const deleteComment= () => {
 };
 
   useEffect(() => {
-    actions.getComments(params.id);
-    actions.getComments(params.projectid)
+    actions.getComments(params.songid);
   }, []);
+
+  // const [song, setSong] = useState();
+  // //const song = store.song.find(element => element.id == params.id)
+
+  // useEffect(() => {
+  //   if (store.song.length == 0) return
+  //   const project = store.projects.find((project) => params.projectid == project.id)
+  //   const currentSong = project.songs.find((song) => params.songid == song.id)
+  //   setSong(currentSong)
+  //   console.log(currentSong);
+
+  // }, [store.song])
 
   return (
 

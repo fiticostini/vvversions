@@ -172,17 +172,8 @@ const MusicPlayer = () => {
         </div>
 
       </div>
-<<<<<<< HEAD
-      {/*Duration*/}
-      <div className="durationStyle">
-        {duration && !isNaN(duration) && calculateTime(duration)}
-      </div>
-    </div>
-    <div>{song && song.description}</div>
-=======
       
       
->>>>>>> 7a0afbe24d90de34660e39c6d2543489016a2f5c
     </div>
     <div className="p-5 d-flex commentsbyartist">
     <div className="justify-content-center fs-6">{song && song.description}</div>
