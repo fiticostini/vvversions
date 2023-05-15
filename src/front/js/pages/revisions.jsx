@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import addimage from "../../img/addimage.png";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import { Context } from '../store/appContext';
 

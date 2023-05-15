@@ -73,14 +73,14 @@ const deleteComment= () => {
 
           </div>
         ))
-        :<div className="spinner-border text-primary" role="status">
+        :<div className="text-primary" role="status">
         <span className="sr-only">Loading...</span>
       </div>}
       </div>
 
-      <p>Comments</p>
+      <p className="mt-3">Comments</p>
       
-      <div className="comment container bg-white">
+      <div className="comment container bg-light">
         <div className="header">
           
           <span className="date"></span>

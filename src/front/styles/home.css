@@ -341,11 +341,13 @@ input::placeholder {
     }
 
     .commentsbyartist {
-        background-color: #e6bdbd;
+        background-color: #fcbcbc;
         border-radius: 9px;
         margin-top: 10px;
         margin-bottom: 10px;
         border-style: double;
         border-width: 7px;
         border-color: #d4d0d0;
+        height: 200px;
+        width: 1200px;
     }
