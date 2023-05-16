@@ -1,5 +1,7 @@
+import { showLoadingNotification, showNotification } from "../utils/toastifyNotifications";
 import { todayDate } from "../utils/todaydate";
-import { toast } from "react-toastify";
+
+
 
 const getState = ({ getStore, getActions, setStore }) => {
   return {
@@ -69,7 +71,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           if (!response.ok) {
             const error = await response.json();
-            // toast.error(error.message)
+            showNotification("error", error.message)
             throw new Error(error.message);
           }
           const data = await response.json();
@@ -77,7 +79,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           setStore({ comments: data});
           actions.getComments(song_id);
-          // toast.success("Comentario creado con exito")
+          showNotification("success", "Comentario creado con exito")
           return true;
         } catch (error) {
           console.log(error);
@@ -146,6 +148,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ artistName: data.artist_name });
           setStore({ username: data.username });
 
+          showNotification("success", "Login successful")
           return true;
         } catch (error) {
           console.log(error);
@@ -186,6 +189,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ token: null });
         setStore({artistName : ""});
         setStore({username: ""});
+        showNotification("info", "Logout successful")
         return true;
       },
 
@@ -229,8 +233,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           if (!response.ok) {
             const error = await response.json();
+            showLoadingNotification(response)
             throw new Error(error.message);
           }
+          showLoadingNotification(response)
           getActions().getProject();
           return true;
         } catch (error) {

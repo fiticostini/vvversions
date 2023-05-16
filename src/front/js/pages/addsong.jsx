@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Context } from "../store/appContext";
 import { useNavigate, Link, useParams } from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { showLoadingNotification } from "../utils/toastifyNotifications";
 
 
 export const AddSong = () => {
@@ -13,11 +16,16 @@ export const AddSong = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const OnSubmit = async (songs) => {
-        const response = await actions.createSong(songs, params.id)
-        if (response) {
-            navigate(`/revisions/${params.id}`)
+        const id = toast.loading("Cargando musica");
+        const isCreated = await actions.createSong(songs, params.id);
+        if (isCreated) {
+            showLoadingNotification(id, "success", "Se ha creado una nueva revisión.");
+            navigate(`/revisions/${params.id}`);
+            return;
         }
+        showLoadingNotification(id, "error", "No se pudo crear la nueva revisión. Intente nuevamente.");
     }
+    
     return (
     <div>
         <div><div className=""><Link to="/projectinput"><p className="ms-2 mt-2">back</p></Link></div> </div>

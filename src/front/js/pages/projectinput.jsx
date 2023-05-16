@@ -68,8 +68,7 @@ export const ProjectInput = () => {
             <div className='text-end date'> <p>{project.version_date}</p> </div>
             <div className='version'><p>version {project.version} </p></div>
             <div>
-              <Link to={`/addsong/${project.id}`}>  <div className='mt-1'><button type="button" className='addfiles btn btn-outline-dark'>add files</button></div> </Link>
-              <div className='mt-1 text-end'><button type="button" className='btn btn-outline-dark openbutton' onClick={() => handleClick(project.id)} >open revisions</button></div>
+            {project.songs.length > 0 ? <div className='mt-1 text-end'><button type="button" className='btn btn-outline-dark openbutton' onClick={() => handleClick(project.id)} >open revisions</button></div> : <Link to={`/addsong/${project.id}`}>  <div className='mt-1'><button type="button" className='addfiles btn btn-outline-dark'>add files</button></div> </Link>}
               <button className="deleteproject text-danger" onClick={() => actions.deleteProject(project.id)}>delete project</button>
             </div>
           </div>
