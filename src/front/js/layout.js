@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
+import { ToastContainer } from "react-toastify";
 
 import { Home } from "./pages/home";
 import { Register } from "./pages/register.jsx";
@@ -29,9 +30,10 @@ const Layout = () => {
 
     return (
         <div>
+            
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
-                 
+                <ToastContainer />
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Register />} path='/register' />
