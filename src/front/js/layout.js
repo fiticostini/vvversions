@@ -17,7 +17,7 @@ import { AddSong } from "./pages/addsong.jsx";
 import { SongRevision } from "./pages/SongRevision.jsx";
 import { ProjectInput } from "./pages/projectinput.jsx";
 import {  Revisions } from "./pages/revisions.jsx";
-
+import 'react-toastify/dist/ReactToastify.css';
 
 
 //create your first component

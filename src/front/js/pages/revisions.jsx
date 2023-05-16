@@ -14,6 +14,11 @@ export function Revisions() {
   const [version, setVersion] = useState(0);
   console.log(version);
 
+  const handleLogout = () => {
+    const response = actions.logout();
+    if (response) navigate("/");
+  };
+
   const handleClick = () => {
     navigate(`/addsong/${params.id}`);
   };
@@ -28,11 +33,25 @@ export function Revisions() {
   }, [store.projects]);
   return (
     <div>
-      <i>
-        <h3 className="text-center mt-5 text-dark">
+      <div className="container-fluid mt-5">
+        <div className="row"> 
+        <div className="text-center col-9">
+        <span className="h3 mt-5 text-dark">
           Revisions of {project && project.title}
-        </h3>
-      </i>
+        </span>
+        </div>
+        <div className="text-end col-3">
+        <button
+            onClick={handleLogout}
+            className="border border-0 bg-black botonlogout  text-danger "
+          >
+            Log out
+          </button>
+        </div>
+        </div>
+      
+        
+      </div>
       <button
         onClick={handleClick}
         className="ms-5 btn btn-outline-dark version text-end"
