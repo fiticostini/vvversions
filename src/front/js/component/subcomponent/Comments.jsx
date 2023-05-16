@@ -75,7 +75,7 @@ const Comments = () => {
               </div>
               <div className="message mb-2">{comment.content}</div>
               <button onClick={() => deleteComment(comment.id)}>
-                <i className="far fa-trash"></i>
+              <i className="fas fa-trash-alt"></i>
               </button>
             </div>
           ))

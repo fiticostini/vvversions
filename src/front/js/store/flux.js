@@ -389,7 +389,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log(error);
           return false;
         }
-      }
+      },
+      
+      cleanComments: () => {
+        const store = getStore();
+        setStore({...store, comments:[]})
+      },
 
     },
   };
