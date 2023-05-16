@@ -176,7 +176,7 @@ const MusicPlayer = () => {
       
     </div>
     <div className="p-5 d-flex commentsbyartist">
-    <div className="justify-content-center fs-5">{song && song.description}</div>
+    <div className="justify-content-center text-center fs-5">{song && song.description}</div>
     </div>
     </div>
     

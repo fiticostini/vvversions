@@ -14,7 +14,6 @@ export function Revisions() {
   const [version, setVersion] = useState(0);
   console.log(version);
 
-
   const handleClick = () => {
     navigate(`/addsong/${params.id}`);
   };
@@ -55,6 +54,7 @@ export function Revisions() {
                 <div>
                   <div className="text-start">
                     <h2 className="projectname">{project.title} </h2>
+
                   </div>
                   <div>
                     <div className="text-start titlesong">title song </div>

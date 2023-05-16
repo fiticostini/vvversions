@@ -23,7 +23,7 @@ export const Navbar = () => {
       } 
     >
       <div className="d-flex">
-		<div className="p-1">
+		<div className="p-2 ms-3">
         <Link to="/">
           <img
             src={VVVERSIONSLOGOBLANCO}

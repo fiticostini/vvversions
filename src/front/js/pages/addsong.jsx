@@ -18,15 +18,17 @@ export const AddSong = () => {
             navigate(`/revisions/${params.id}`)
         }
     }
-    return (<div className="d-flex justify-content-center">   
-    <div className=""><Link to="/projectinput"><i className=" fa text-dark logoback p-3">BACK</i></Link></div> 
-        <div className="form-group">
+    return (
+    <div>
+        <div><div className=""><Link to="/projectinput"><p className="ms-2 mt-2">back</p></Link></div> </div>
+    <div className="d-flex justify-content-center ">   
+        <div className="form-group mb-5">
         <div className="addproject p-3 ">
             <form onSubmit={handleSubmit(OnSubmit)}>
                 <h2 className="text-center text-white p-3 mt-3">Add Files</h2>
                 <div>
                     <div className="p-1">
-                        <label className="text-white">Cancion</label>
+                        <label className="text-white p-1">add song</label>
                         <input className="form-control" type="file" {...register(`soundfile`, {
                             required: true
                         })} placeholder="Add Mp3/Wav file">
@@ -36,7 +38,7 @@ export const AddSong = () => {
                         {errors.email?.type === `required` && <p className="text-danger">El Campo es Requerido</p>}
                     </div>
                     <div className="p-1">
-                        <label className="text-white">Imagen</label>
+                        <label className="text-white p-1">add image</label>
                         <input className="form-control" type="file" {...register(`imagefile`, {
                             required: true
                         })} placeholder="Add Image">
@@ -44,7 +46,7 @@ export const AddSong = () => {
                         {errors.password?.type === `required` && <p className="text-danger">El Campo es Requerido</p>}
                     </div>
                     <div className="p-1">
-                        <textarea className="form-control" type="text" {...register(`description`, {
+                        <textarea className="form-control mt-1 mb-1" type="text" {...register(`description`, {
                             required: true
                         })} placeholder="add comments about this project">
                         </textarea>
@@ -53,37 +55,34 @@ export const AddSong = () => {
                     <div className="p-1">
                         <input className="form-control" type="text" {...register(`artist`, {
                             required: true
-                        })} placeholder="add artist about this project">
+                        })} placeholder="add artist">
                         </input>
                         {errors.artist_name?.type === `required` && <p className="text-danger">El Campo es Requerido</p>}
                     </div>
                     <div className="p-1">
                         <input className="form-control" type="text" {...register(`gender`, {
                             required: true
-                        })} placeholder="add gender about this project">
+                        })} placeholder="music genre">
                         </input>
                         {errors.artist_name?.type === `required` && <p className="text-danger">El Campo es Requerido</p>}
                     </div>
                     <div className="p-1">
                         <input className="form-control" type="text" {...register(`title`, {
                             required: true
-                        })} placeholder="add title about this project">
+                        })} placeholder="title">
                         </input>
                     </div>
-                        {/* <div className="p-1">
-                        <input className="form-control" type="text" {...register(`version_date`, {
-                            required: true
-                        })} placeholder="add version_date about this project">
-                        </input>
-                        {errors.artist_name?.type === `required` && <p className="text-danger">El Campo es Requerido</p>}
-                    </div> */}
-                    <div className="text-center p-3">
+                       
+                    <div className="text-center p-1 mb-3">
+
                         <input className="submit text-white" type="submit" value="submit"></input>
                     </div>
                 </div>
             </form>
             </div>
         </div>
+    </div>
+   
     </div>
     );
 };
