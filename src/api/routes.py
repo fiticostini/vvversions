@@ -199,10 +199,10 @@ def update_comment(song_id, comment_id):
 
 
 
-@api.route("/comments/<int:song_id>/<int:comment_id>", methods=["DELETE"])
+@api.route("/comments/<int:comment_id>", methods=["DELETE"])
 @jwt_required()
-def delete_comment(song_id, comment_id):
-    comment = Comment.query.filter_by(song_id=song_id, id=comment_id).first()
+def delete_comment(comment_id):
+    comment = Comment.query.filter_by(id=comment_id).first()
 
     if comment:
         db.session.delete(comment)

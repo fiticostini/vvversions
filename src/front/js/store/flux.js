@@ -1,4 +1,5 @@
 import { todayDate } from "../utils/todaydate";
+import { toast } from "react-toastify";
 
 const getState = ({ getStore, getActions, setStore }) => {
   return {
@@ -68,6 +69,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           if (!response.ok) {
             const error = await response.json();
+            // toast.error(error.message)
             throw new Error(error.message);
           }
           const data = await response.json();
@@ -75,7 +77,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           setStore({ comments: data});
           actions.getComments(song_id);
-
+          // toast.success("Comentario creado con exito")
           return true;
         } catch (error) {
           console.log(error);
@@ -361,6 +363,33 @@ const getState = ({ getStore, getActions, setStore }) => {
           return false;
         }
       },
+
+      deleteComment: async(comment_id, song_id) => {
+        const store = getStore();
+        const options = {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${store.token}`
+          },
+        };
+        try {
+          const response = await fetch(
+            `${process.env.BACKEND_URL}/api/comments/${comment_id}`,
+            options
+          );
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
+          }
+          getActions().getComments(song_id);
+          return true;
+          
+        } catch (error) {
+          console.log(error);
+          return false;
+        }
+      }
 
     },
   };
