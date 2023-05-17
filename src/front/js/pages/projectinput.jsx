@@ -36,22 +36,19 @@ export const ProjectInput = () => {
 
   return (
     <div>
-      <div className="mt-4 d-flex justify-content-between">
-        <div>
-          <div className="">
-            <Link to="/">
-              <img src={VVVERSIONSLOGONEGROMOBILE} className="back2 p-2"></img>
-            </Link>
-          </div>
+      <div className=" d-flex justify-content-between mt-5">
+        <div className="">
+          <Link to="/">
+            <img src={VVVERSIONSLOGONEGROMOBILE} className="back2 "></img>
+          </Link>
         </div>
-
-        <div className="d-flex">
-          <span className="text-end artistheader text-black me-5 mt-2 fs-2">
-            {store.artistName}
-          </span>
+        <div className="d-flex fs-1 mt-3">
+          {store.artistName}
+        </div>
+        <div className="mt-4">
           <button
             onClick={handleLogout}
-            className="border border-0 bg-black botonlogout  text-danger "
+            className="logouttitle text-danger me-5 "
           >
             Log out
           </button>
@@ -71,8 +68,7 @@ export const ProjectInput = () => {
         {store.projects.map((project, index) => (
           <div className="container d-flex projectcontainer my-3 col-8 justify-content-between">
             <div className="d-flex">
-              <div>
-                {" "}
+              <div className="">
                 <img
                   src={
                     project.songs.length > 0
@@ -90,8 +86,8 @@ export const ProjectInput = () => {
                   <div className="text-start titlesong">title song </div>
                 </div>
                 <div className="">
-                  <div className="">
-                    <button onClick={() => actions.createVersion(project.id)} type="button" className="newversion p-2 text-white">
+                  <div className="text-start mt-5">
+                    <button onClick={() => actions.createVersion(project.id)} type="button" className="newversion p-2 text-white my-1">
                       new version
                     </button>
                   </div>

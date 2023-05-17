@@ -28,41 +28,26 @@ body {
 
 .botonregister {
 
-    font-family: Courier New;
+    
     color: #ffffff;
-    font-size: 13px;
-    padding: 6px;
-    text-decoration: none;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    border-radius: 5px;
-    -webkit-box-shadow: 0px 0px 0px #666666;
-    -moz-box-shadow: 0px 0px 0px #666666;
-    box-shadow: 0px 0px 0px #666666;
-    text-shadow: 1px 1px 3px #ffffff;
-    border: dotted #ffffff 0px;
-    background: #000000;
-    padding: 12px;
+    background-color: #000000;
+    border-style: none;
+    
 }
 
 .botonlogin {
 
-    font-family: Courier New;
+    
     color: #ffffff;
-    font-size: 13px;
-    padding-top: 14px;
-    margin-left: 50px;
-    text-decoration: none;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    border-radius: 5px;
-    -webkit-box-shadow: 0px 0px 0px #666666;
-    -moz-box-shadow: 0px 0px 0px #666666;
-    box-shadow: 0px 0px 0px #666666;
-    text-shadow: 1px 1px 3px #ffffff;
-    border: dotted #ffffff 0px;
+    border-style: none;
     background: #000000;
 
+}
+
+.botonlogout {
+    
+    color: #ff0000;
+    border-style: none; 
 }
 
 .footer {
@@ -171,6 +156,7 @@ a:active {
     margin-left: 20px;
     font-weight: 700;
     font-size: 40px;
+    width: 600px;
 
 }
 
@@ -207,9 +193,9 @@ a:active {
 }
 
 .addfiles {
-    font-size: 13px;
-    background-color: #CCEAF4;
-    margin-bottom: 5px;
+    margin-top: 14px;
+    width: 120px;
+    height: 40px;
 }
 
 .titlesong {
@@ -260,7 +246,7 @@ input::placeholder {
 }
 
 .deleteproject {
-    margin-top: 07px;
+    margin-top: 27px;
     border: 0px;
     background-color: #ffffff;
 }
@@ -304,26 +290,6 @@ input::placeholder {
     border-color: #a9a9a9;
 }
 
-.botonlogout {
-    font-family: Courier New;
-    color: #ff0000;
-    font-size: 15px;
-    padding-top: 12px;
-    margin-left: 33px;
-    text-decoration: none;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    border-radius: 5px;
-    -webkit-box-shadow: 0px 0px 0px #666666;
-    -moz-box-shadow: 0px 0px 0px #666666;
-    box-shadow: 0px 0px 0px #666666;
-    text-shadow: 1px 1px 3px #ff0000;
-    border: dotted #ffffff 0px;
-    background: #000000;
-
-
-}
-
 .back2 {
     width: 100px;
     margin-left: 60px;
@@ -355,10 +321,33 @@ input::placeholder {
 }
 
 .openbutton {
-    margin-top: 5px;
+    margin-top: 14px;
+    width: 120px;
+    height: 40px;
 }
 
 .aboutlink {
     margin-right: 77px;
     margin-top: 24px;
+}
+
+
+
+.logouttitle {
+    justify-content: end;
+    border: none;
+    background-color: transparent;
+    margin-top: 12px;
+    margin-left: 140px;
+}
+
+.revisiontitle {
+    justify-content: center;
+    margin-left: 610px;
+    font-size: 30px;
+}
+
+.basura {
+    border: none;
+    background-color: transparent;
 }

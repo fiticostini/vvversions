@@ -33,35 +33,37 @@ export function Revisions() {
   }, [store.projects]);
   return (
     <div>
-      <div className="container-fluid mt-5">
-        <div className="row"> 
-        <div className="text-center col-9">
-        <span className="h3 mt-5 text-dark">
+      <div className="d-flex mt-5">
+        
+       <div className="revisiontitle col-5 mt-3">
+        <span className="text-dark fs-1 ">
           Revisions of {project && project.title}
         </span>
         </div>
-        <div className="text-end col-3">
+        <div>
+        <div className="">
         <button
             onClick={handleLogout}
-            className="border border-0 bg-black botonlogout  text-danger "
+            className="text-danger logouttitle  "
           >
             Log out
           </button>
+          </div>
         </div>
-        </div>
-      
-        
+
       </div>
+      <div className="text-center">
       <button
         onClick={handleClick}
-        className="ms-5 btn btn-outline-dark version text-end"
+        className=" btn btn-outline-dark version fs-6 mt-5 text-end"
       >
         Add Revision{" "}
       </button>
+      </div>
       <div>
         {project &&
           project.songs.map((song, index) => (
-            <div className="container d-flex projectcontainer my-3 col-8 justify-content-between">
+            <div className="container d-flex projectcontainer my-5 col-8 justify-content-between ">
               <div className="d-flex">
                 <div>
                   {" "}
@@ -113,16 +115,19 @@ export function Revisions() {
           ))}
       </div>
       <div className="d-flex">
-        <div className="">
-          <Link to="/projectinput">
-            <p className="back2 p-2">BACK</p>
-          </Link>
-        </div>
+        
         <div>
-          {" "}
-          <img src={VVVERSIONSLOGONEGRO} className="col-2 ms-5"></img>
+        <div className="text-center">
+          
+          <img src={VVVERSIONSLOGONEGRO} className="col-2 text-center"></img>
+          </div>
         </div>
       </div>
+      <div className="">
+          <Link to="/projectinput">
+            <p className="back2 p-2">Back</p>
+          </Link>
+        </div>
     </div>
   );
 }
