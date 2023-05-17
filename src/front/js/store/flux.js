@@ -1,3 +1,7 @@
+import {
+  showLoadingNotification,
+  showNotification,
+} from "../utils/toastifyNotifications";
 import { todayDate } from "../utils/todaydate";
 import { toast } from "react-toastify";
 
@@ -9,14 +13,14 @@ const getState = ({ getStore, getActions, setStore }) => {
       artistName: localStorage.getItem("artistName") || "",
       username: localStorage.getItem("username") || "",
       comments: [],
-      song:[],
+      song: [],
       projects: [],
     },
     actions: {
       // Use getActions to call a function within a fuction
-      
-      getSong: async(song_id) => {
-        const store = getStore()
+
+      getSong: async (song_id) => {
+        const store = getStore();
 
         const options = {
           method: "GET",
@@ -44,11 +48,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.log(error);
           return false;
-        };
+        }
       },
 
-
-      addComments: async(commentBody, song_id) => {
+      addComments: async (commentBody, song_id) => {
         const store = getStore();
         const actions = getActions();
 
@@ -69,23 +72,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           if (!response.ok) {
             const error = await response.json();
-            // toast.error(error.message)
+            showNotification("error", error.message);
             throw new Error(error.message);
           }
           const data = await response.json();
           console.log(data);
 
-          setStore({ comments: data});
+          setStore({ comments: data });
           actions.getComments(song_id);
-          // toast.success("Comentario creado con exito")
+          showNotification("success", "Comment posted");
           return true;
         } catch (error) {
           console.log(error);
           return false;
         }
-
       },
-      
+
       getComments: async (song_id) => {
         const store = getStore();
 
@@ -134,18 +136,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           if (!response.ok) {
             const error = await response.json();
+            toast.error(error.msg);
             throw new Error(error.message);
           }
           const data = await response.json();
           console.log(data);
           localStorage.setItem("token", data.access_token);
-          localStorage.setItem("artistName", data.artist_name)
-          localStorage.setItem("username", data.username)
+          localStorage.setItem("artistName", data.artist_name);
+          localStorage.setItem("username", data.username);
 
           setStore({ token: data.access_token });
           setStore({ artistName: data.artist_name });
           setStore({ username: data.username });
-          toast.success("Se ha logueado correctamente")
+
+          showNotification("success", "Successful Login");
           return true;
         } catch (error) {
           console.log(error);
@@ -170,9 +174,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           if (!response.ok) {
             const error = await response.json();
+            toast.error(error.msg);
             throw new Error(error.message);
           }
-          toast.success("Se ha registrado exitosamente")
+          toast.success("Username created");
           return true;
         } catch (error) {
           console.log(error);
@@ -185,9 +190,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         localStorage.removeItem("artistName");
         localStorage.removeItem("username");
         setStore({ token: null });
-        setStore({artistName : ""});
-        setStore({username: ""});
-        toast.warning("Ha cerrado su sesion")
+        setStore({ artistName: "" });
+        setStore({ username: "" });
+        showNotification("info", "Successful Logout");
         return true;
       },
 
@@ -208,18 +213,17 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log(data.soundfile[0]);
         const store = getStore();
         const formData = new FormData();
-        formData.append("title", data.title)
-        formData.append("artist", data.artist)
-        formData.append("description", data.description)
-        formData.append("gender", data.gender)
-        formData.append("version_date", todayDate())
-        formData.append("song", data.soundfile[0])
-        formData.append("cover", data.imagefile[0])
+        formData.append("title", data.title);
+        formData.append("artist", data.artist);
+        formData.append("description", data.description);
+        formData.append("gender", data.gender);
+        formData.append("version_date", todayDate());
+        formData.append("song", data.soundfile[0]);
+        formData.append("cover", data.imagefile[0]);
         const options = {
           method: "POST",
           headers: {
-            
-            authorization: `Bearer ${store.token}` 
+            authorization: `Bearer ${store.token}`,
           },
           body: formData,
         };
@@ -231,16 +235,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           if (!response.ok) {
             const error = await response.json();
+            showLoadingNotification(response);
             throw new Error(error.message);
           }
+          showLoadingNotification(response);
           getActions().getProject();
-          toast.success(`Se ha agragado una nueva revision`)
           return true;
         } catch (error) {
           console.log(error);
           return false;
         }
-
       },
 
       getProject: async () => {
@@ -249,10 +253,12 @@ const getState = ({ getStore, getActions, setStore }) => {
         try {
           const response = await fetch(
             `${process.env.BACKEND_URL}/api/projects`,
-            {headers: {
-              "Content-Type": "application/json",
-              authorization: `Bearer ${store.token}` 
-            },}
+            {
+              headers: {
+                "Content-Type": "application/json",
+                authorization: `Bearer ${store.token}`,
+              },
+            }
           );
           const data = await response.json();
           console.log(data);
@@ -260,19 +266,22 @@ const getState = ({ getStore, getActions, setStore }) => {
             const error = await response.json();
             throw new Error(error.message);
           }
-          let projects = []
+          let projects = [];
           for (let project of data.projects) {
-            console.log(project)
-            const songResponse = await fetch (`${process.env.BACKEND_URL}/api/songs/${project.id}`, {
-              headers:{
-                authorization:`Bearer ${store.token}`
+            console.log(project);
+            const songResponse = await fetch(
+              `${process.env.BACKEND_URL}/api/songs/${project.id}`,
+              {
+                headers: {
+                  authorization: `Bearer ${store.token}`,
+                },
               }
-            })
-            const songData = await songResponse.json()
-            projects.push({...project, songs: songData.songs})
+            );
+            const songData = await songResponse.json();
+            projects.push({ ...project, songs: songData.songs });
           }
-          setStore({...store, projects:projects})
-          console.log(projects)
+          setStore({ ...store, projects: projects });
+          console.log(projects);
           return true;
         } catch (error) {
           console.log(error);
@@ -280,17 +289,16 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-
       createProject: async (data) => {
         console.log(data);
-        toast.info("creando proyecto")
+        toast.info("Creating project");
         const store = getStore();
-        const body = {...data, version:1, version_date:todayDate()}
+        const body = { ...data, version: 1, version_date: todayDate() };
         const options = {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            authorization: `Bearer ${store.token}` 
+            authorization: `Bearer ${store.token}`,
           },
           body: JSON.stringify(body),
         };
@@ -302,11 +310,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           if (!response.ok) {
             const error = await response.json();
-            toast.error(error.msg)
+            toast.error(error.msg);
             throw new Error(error.message);
           }
           getActions().getProject();
-          toast.success("proyeto creado con exito")
+          toast.success("Project created");
           return true;
         } catch (error) {
           console.log(error);
@@ -316,12 +324,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       createVersion: async (id) => {
         const store = getStore();
-        const body = {version_date:todayDate()}
+        const body = { version_date: todayDate() };
         const options = {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            authorization: `Bearer ${store.token}` 
+            authorization: `Bearer ${store.token}`,
           },
           body: JSON.stringify(body),
         };
@@ -341,20 +349,18 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log(error);
           return false;
         }
-      },  
-      
+      },
 
       deleteProject: async (id) => {
-
         const store = getStore();
         const options = {
           method: "DELETE",
           headers: {
-           "Content-Type": "application/json",
-           authorization: `Bearer ${store.token}`
+            "Content-Type": "application/json",
+            authorization: `Bearer ${store.token}`,
           },
-         };
-         try {
+        };
+        try {
           const response = await fetch(
             `${process.env.BACKEND_URL}/api/project/${id}`,
             options
@@ -365,7 +371,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
           getActions().getProject();
           return true;
-          
         } catch (error) {
           console.log(error);
           return false;
@@ -373,16 +378,15 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       deleteSong: async (id) => {
-
         const store = getStore();
         const options = {
           method: "DELETE",
           headers: {
-           "Content-Type": "application/json",
-           authorization: `Bearer ${store.token}`
+            "Content-Type": "application/json",
+            authorization: `Bearer ${store.token}`,
           },
-         };
-         try {
+        };
+        try {
           const response = await fetch(
             `${process.env.BACKEND_URL}/api/songs/${id}`,
             options
@@ -393,20 +397,19 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
           getActions().getProject();
           return true;
-          
         } catch (error) {
           console.log(error);
           return false;
         }
       },
 
-      deleteComment: async(comment_id, song_id) => {
+      deleteComment: async (comment_id, song_id) => {
         const store = getStore();
         const options = {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-            authorization: `Bearer ${store.token}`
+            authorization: `Bearer ${store.token}`,
           },
         };
         try {
@@ -420,17 +423,18 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
           getActions().getComments(song_id);
           return true;
-          
         } catch (error) {
           console.log(error);
           return false;
         }
-      }
+      },
 
+      cleanComments: () => {
+        const store = getStore();
+        setStore({ ...store, comments: [] });
+      },
     },
   };
 };
-
-
 
 export default getState;

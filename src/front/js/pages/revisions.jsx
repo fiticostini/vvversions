@@ -31,6 +31,12 @@ export function Revisions() {
     console.log(project);
     setProject(project);
   }, [store.projects]);
+
+  useEffect(() => {
+    actions.cleanComments();
+  },[])
+
+
   return (
     <div>
       <div className="d-flex mt-5">

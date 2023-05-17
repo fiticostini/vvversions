@@ -80,7 +80,9 @@ const Comments = () => {
               <div className="message ">{comment.content}</div>
               <div className="bg-light">
               <button onClick={() => deleteComment(comment.id)}>
+
                 <i className="fas fa-trash basura"></i>
+
               </button>
               </div>
             </div>

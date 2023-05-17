@@ -83,7 +83,7 @@ export const ProjectInput = () => {
                   <h2 className="projectname">{project.title} </h2>
                 </div>
                 <div>
-                  <div className="text-start titlesong">title song </div>
+                  <div className="text-start titlesong">title song</div>
                 </div>
                 <div className="">
                   <div className="text-start mt-5">
