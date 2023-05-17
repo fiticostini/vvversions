@@ -188,6 +188,7 @@ a:active {
 
 .version {
     font-size: 14px;
+    font-weight: 600
 
     ;
 }
@@ -343,7 +344,7 @@ input::placeholder {
 
 .revisiontitle {
     justify-content: center;
-    margin-left: 610px;
+    margin-left: 570px;
     font-size: 30px;
 }
 

@@ -131,7 +131,7 @@ export function Revisions() {
       </div>
       <div className="">
           <Link to="/projectinput">
-            <p className="back2 p-2">Back</p>
+            <p className="back2 p-2">go back to your projects</p>
           </Link>
         </div>
     </div>

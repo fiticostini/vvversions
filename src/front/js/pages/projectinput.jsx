@@ -99,7 +99,7 @@ export const ProjectInput = () => {
                 {" "}
                 <p>{project.version_date}</p>{" "}
               </div>
-              <div className="version">
+              <div className="version ">
                 <p>version {project.version} </p>
               </div>
               <div>

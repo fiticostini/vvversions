@@ -18,9 +18,9 @@ export const SongRevision = () => {
 
       <div className="text-center">
         <img src={VVVERSIONSLOGONEGRO} className="col-2"></img>
-        <div className="">
+        <div className="col-4">
           <Link to={`/revisions/${projectid}`}>
-            <p className="back2 p-2">BACK</p>
+            <p className="back2 p-2 ">back to revisions</p>
           </Link>
         </div>  
       </div>
