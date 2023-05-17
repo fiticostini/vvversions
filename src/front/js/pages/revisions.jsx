@@ -31,37 +31,44 @@ export function Revisions() {
     console.log(project);
     setProject(project);
   }, [store.projects]);
+
+  useEffect(() => {
+    actions.cleanComments();
+  },[])
+
+
   return (
     <div>
-      <div className="container-fluid mt-5">
-        <div className="row"> 
-        <div className="text-center col-9">
-        <span className="h3 mt-5 text-dark">
-          Revisions of {project && project.title}
-        </span>
-        </div>
-        <div className="text-end col-3">
+      <div className="col-11 mt-5 text-end">
         <button
             onClick={handleLogout}
-            className="border border-0 bg-black botonlogout  text-danger "
+            className="text-danger logouttitle"
           >
-            Log out
+            <i className="fas fa-sign-out-alt"></i>
           </button>
-        </div>
-        </div>
-      
+          </div>
+      <div className="d-flex mt-2">
         
+       <div className="col-12 text-center mt-4">
+        <span className="text-dark"><h3>
+          Revisions of {project && project.title}</h3>
+        </span>
+        </div>
+        <div>
+        </div>
       </div>
+      <div className="text-center">
       <button
         onClick={handleClick}
-        className="ms-5 btn btn-outline-dark version text-end"
+        className=" btn btn-outline-dark version fs-6 mt-5 text-end"
       >
         Add Revision{" "}
       </button>
+      </div>
       <div>
         {project &&
           project.songs.map((song, index) => (
-            <div className="container d-flex projectcontainer my-3 col-8 justify-content-between">
+            <div className="container d-flex projectcontainer my-1 col-8 justify-content-between ">
               <div className="d-flex">
                 <div>
                   {" "}
@@ -113,16 +120,19 @@ export function Revisions() {
           ))}
       </div>
       <div className="d-flex">
-        <div className="">
-          <Link to="/projectinput">
-            <p className="back2 p-2">BACK</p>
-          </Link>
-        </div>
+        
         <div>
-          {" "}
-          <img src={VVVERSIONSLOGONEGRO} className="col-2 ms-5"></img>
+        <div className="text-center">
+          
+          <img src={VVVERSIONSLOGONEGRO} className="col-2 text-center"></img>
+          </div>
         </div>
       </div>
+      <div className="">
+          <Link to="/projectinput">
+            <p className="back2 p-2">go back to your projects</p>
+          </Link>
+        </div>
     </div>
   );
 }

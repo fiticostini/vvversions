@@ -89,13 +89,15 @@ const MusicPlayer = () => {
 
   // Functions to go back/forward
   const backFive = () => {
-    progressBar.current.value = Number(progressBar.current.value - 5); // Number() it's a JS function that will take any string and convert it to a number.
+    progressBar.current.value = Number(progressBar.current.value) - 5; // Number() it's a JS function that will take any string and convert it to a number.
     changeRange(); // We want to update everything just as we did with the range slider.
+    console.log(typeof progressBar.current.value)
   };
 
   const forwardFive = () => {
-    progressBar.current.value = Number(progressBar.current.value + 5);
+    progressBar.current.value = Number(progressBar.current.value) + 5;
     changeRange();
+    console.log(typeof progressBar.current.value)
   };
 
   // Intentando que el waveSurfer funciona aqui:

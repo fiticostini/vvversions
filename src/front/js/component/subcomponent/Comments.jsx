@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../../store/appContext";
 import "../../../styles/CommentStyles.css";
 import { useParams } from "react-router-dom";
+import { todayDate } from "../../utils/todaydate";
 
 // const dummyComments = [];
 
@@ -22,7 +23,7 @@ const Comments = () => {
       actions.addComments(
         {
           content: commentBody,
-          start_date: "10/5/2023",
+          start_date: todayDate(),
         },
         params.songid
       );
@@ -51,11 +52,11 @@ const Comments = () => {
         <i>add your comment</i>
       </div>
       <div>{error !== "" && <span>Llene el comentario</span>}</div>
-      <div className="comment-form-row">
+      <div className="comment-form-row p-3">
         <input
           value={commentBody}
           onChange={(event) => handleCommentChange(event)}
-          className="message-input"
+          className="message-input p-3"
           placeholder="what do you think of this song?"
         ></input>
         <button onClick={(event) => onComment(event)} className="btn">
@@ -69,14 +70,22 @@ const Comments = () => {
               key={comment.id}
               className="comment container bg-white text-start my-1"
             >
-              <div className="header mt-1 ms-2">
+              <div className="header ms-2  d-flex">
+                <div>
                 <span>{comment.name}</span>
+                </div>
+                <div>
                 <span className="date">{comment.start_date}</span>
+                </div>
               </div>
-              <div className="message mb-2">{comment.content}</div>
-              <button onClick={() => deleteComment(comment.id)}>
-                <i className="far fa-trash"></i>
+              <div className="message mt-2 ">{comment.content}</div>
+              <div className=" text-end">
+              <button onClick={() => deleteComment(comment.id)} className="basura mt-2">
+
+                <i className="fas fa-trash"></i>
+
               </button>
+              </div>
             </div>
           ))
         ) : (

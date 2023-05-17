@@ -36,28 +36,26 @@ export const ProjectInput = () => {
 
   return (
     <div>
-      <div className="mt-4 d-flex justify-content-between">
-        <div>
-          <div className="">
-            <Link to="/">
-              <img src={VVVERSIONSLOGONEGROMOBILE} className="back2 p-2"></img>
-            </Link>
-          </div>
-        </div>
-
-        <div className="d-flex">
-          <span className="text-end artistheader text-black me-5 mt-2 fs-2">
-            {store.artistName}
-          </span>
+      <div className="text-end me-2 mt-3">
           <button
             onClick={handleLogout}
-            className="border border-0 bg-black botonlogout  text-danger "
+            className="logouttitle text-danger me-4"
           >
-            Log out
+            <i className="fas fa-sign-out-alt"></i>
           </button>
         </div>
+      <div className="text-end">
+        <div className="">
+          <Link to="/">
+            <img src={VVVERSIONSLOGONEGROMOBILE} className="back2"></img>
+          </Link>
+        </div>
+        <div className="col-12 text-center">
+          <h1>{store.artistName}</h1>
+        </div>
+        
       </div>
-      <div className=" p-5 text-center">
+      <div className="my-3 text-center">
         <input
           type="text"
           placeholder="    name"
@@ -69,10 +67,9 @@ export const ProjectInput = () => {
           add a project
         </button>
         {store.projects.map((project, index) => (
-          <div className="container d-flex projectcontainer my-3 col-8 justify-content-between">
+          <div className="container d-flex projectcontainer my-1 col-8 justify-content-between">
             <div className="d-flex">
-              <div>
-                {" "}
+              <div className="">
                 <img
                   src={
                     project.songs.length > 0
@@ -87,11 +84,11 @@ export const ProjectInput = () => {
                   <h2 className="projectname">{project.title} </h2>
                 </div>
                 <div>
-                  <div className="text-start titlesong">title song </div>
+                  <div className="text-start titlesong">title song</div>
                 </div>
                 <div className="">
-                  <div className="">
-                    <button onClick={() => actions.createVersion(project.id)} type="button" className="newversion p-2 text-white">
+                  <div className="text-start mt-5">
+                    <button onClick={() => actions.createVersion(project.id)} type="button" className="newversion p-2 text-white my-1">
                       new version
                     </button>
                   </div>
@@ -103,7 +100,7 @@ export const ProjectInput = () => {
                 {" "}
                 <p>{project.version_date}</p>{" "}
               </div>
-              <div className="version">
+              <div className="version ">
                 <p>version {project.version} </p>
               </div>
               <div>
