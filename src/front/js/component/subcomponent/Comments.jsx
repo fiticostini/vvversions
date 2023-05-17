@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../../store/appContext";
 import "../../../styles/CommentStyles.css";
 import { useParams } from "react-router-dom";
+import { todayDate } from "../../utils/todaydate";
 
 // const dummyComments = [];
 
@@ -22,7 +23,7 @@ const Comments = () => {
       actions.addComments(
         {
           content: commentBody,
-          start_date: "10/5/2023",
+          start_date: todayDate(),
         },
         params.songid
       );

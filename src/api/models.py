@@ -92,6 +92,7 @@ class Song(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "project_id": self.project_id,
             "title": self.title,
             "description": self.description,
             "gender": self.gender,
