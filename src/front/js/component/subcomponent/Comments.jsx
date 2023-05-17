@@ -69,14 +69,22 @@ const Comments = () => {
               key={comment.id}
               className="comment container bg-white text-start my-1"
             >
-              <div className="header mt-1 ms-2">
+              <div className="header ms-2  d-flex">
+                <div>
                 <span>{comment.name}</span>
+                </div>
+                <div>
                 <span className="date">{comment.start_date}</span>
+                </div>
               </div>
-              <div className="message mb-2">{comment.content}</div>
+              <div className="message ">{comment.content}</div>
+              <div className="bg-light">
               <button onClick={() => deleteComment(comment.id)}>
-              <i className="fas fa-trash-alt"></i>
+
+                <i className="fas fa-trash basura"></i>
+
               </button>
+              </div>
             </div>
           ))
         ) : (

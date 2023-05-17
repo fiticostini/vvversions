@@ -12,55 +12,35 @@ export const Navbar = () => {
     if (response) navigate("/");
   };
   return (
-	<div className="bg-white">
-    <nav
-      className={
-        location.pathname == `/register`
-          ? `invisible`
-          : location.pathname == `/about`
-          ? `invisible`
-          : `navbar navbarhome`
-      } 
-    >
-      <div className="d-flex">
-		<div className="p-2 ms-3">
-        <Link to="/">
-          <img
-            src={VVVERSIONSLOGOBLANCO}
-            className="col-3 ms-3 navbar-brand mb-0 h1" ></img>
-        </Link>
-		</div>
-        <div className="ml-auto d-flex me-1 mt-4 col-3">
-			
-          <Link to="/register">
-            <button
-              disabled={location.pathname == `/register` ? true : false}
-              className={
-                location.pathname == `/register`
-                  ? "invisible"
-                  : "botonregister text-white me-3"
-              }
-            >
-              {" "}
-              Register
-			  
-            </button>
-			
-          </Link>
-          <Link to="/user/login">
-            <button className="botonlogin text-white me-3">Sign In</button>
-          </Link>
-		  <div>
-          <button
-            onClick={handleLogout}
-            className="border border-0 bg-black botonlogout  text-danger "
-          >
-            Log out
-          </button>
-		  </div>
+    <div className="bg-white">
+      <nav
+        className="navbar navbarhome">
+        <div className="d-flex">
+          <div className="p-1 ms-3">
+            <Link to="/">
+              <img
+                src={VVVERSIONSLOGOBLANCO}
+                className="col-3 ms-3 navbar-brand mb-0 h1"
+              ></img>
+            </Link>
+          </div>
+          <div className="ml-auto d-flex me-5 mt-5 col-2 justify-content-between">
+            <Link to="/register">
+              <button className="botonregister text-white ">Register</button>
+            </Link>
+            <Link to="/user/login">
+              <button className="botonlogin text-white">Sign In</button>
+            </Link>
+            <div>
+              <button
+                onClick={handleLogout}
+                className="bg-black botonlogout text-danger ">
+                Log out
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    </nav>
-	</div>
+      </nav>
+    </div>
   );
 };
