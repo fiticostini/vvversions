@@ -16,14 +16,14 @@ export const AddSong = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const OnSubmit = async (songs) => {
-        const id = toast.loading("Cargando musica");
+        const id = toast.loading("Uploading file");
         const isCreated = await actions.createSong(songs, params.id);
         if (isCreated) {
-            showLoadingNotification(id, "success", "Se ha creado una nueva revisión.");
+            showLoadingNotification(id, "success", "New revision created");
             navigate(`/revisions/${params.id}`);
             return;
         }
-        showLoadingNotification(id, "error", "No se pudo crear la nueva revisión. Intente nuevamente.");
+        showLoadingNotification(id, "error", "New revision could not be created. Please try again.");
     }
     
     return (
