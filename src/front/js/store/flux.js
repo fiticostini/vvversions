@@ -175,6 +175,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             const error = await response.json();
             throw new Error(error.message);
           }
+          toast.success("Se ha registrado exitosamente")
           return true;
         } catch (error) {
           console.log(error);
@@ -238,6 +239,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
           showLoadingNotification(response)
           getActions().getProject();
+          toast.success(`Se ha agragado una nueva revision`)
           return true;
         } catch (error) {
           console.log(error);
@@ -286,6 +288,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       createProject: async (data) => {
         console.log(data);
+        toast.info("creando proyecto")
         const store = getStore();
         const body = {...data, version:1, version_date:todayDate()}
         const options = {
@@ -304,6 +307,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           if (!response.ok) {
             const error = await response.json();
+            toast.error(error.msg)
+            throw new Error(error.message);
+          }
+          getActions().getProject();
+          toast.success("proyeto creado con exito")
+          return true;
+        } catch (error) {
+          console.log(error);
+          return false;
+        }
+      },
+
+      createVersion: async (id) => {
+        const store = getStore();
+        const body = {version_date:todayDate()}
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${store.token}` 
+          },
+          body: JSON.stringify(body),
+        };
+        try {
+          const response = await fetch(
+            `${process.env.BACKEND_URL}/api/project/${id}`,
+            options
+          );
+
+          if (!response.ok) {
+            const error = await response.json();
             throw new Error(error.message);
           }
           getActions().getProject();
@@ -312,7 +346,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log(error);
           return false;
         }
-      },
+      },  
+      
 
       deleteProject: async (id) => {
 
