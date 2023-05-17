@@ -77,11 +77,11 @@ const Comments = () => {
                 <span className="date">{comment.start_date}</span>
                 </div>
               </div>
-              <div className="message ">{comment.content}</div>
-              <div className="bg-light">
-              <button onClick={() => deleteComment(comment.id)}>
+              <div className="message mt-2 ">{comment.content}</div>
+              <div className=" text-end">
+              <button onClick={() => deleteComment(comment.id)} className="basura mt-2">
 
-                <i className="fas fa-trash basura"></i>
+                <i className="fas fa-trash"></i>
 
               </button>
               </div>
