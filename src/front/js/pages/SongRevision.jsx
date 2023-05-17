@@ -12,6 +12,8 @@ export const SongRevision = () => {
   return (
     <div className="p-5 text-end">
       <h3>{store.artistName}</h3>
+      <h3>{store.projects[0].title}</h3>
+      <h3>PROBANDO</h3>
       
       <ProyectRevision />
 
