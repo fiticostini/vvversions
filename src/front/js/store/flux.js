@@ -234,7 +234,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             throw new Error(error.message);
           }
           getActions().getProject();
-          toast.success(`Se ha agragado una nueva revision`)
+          toast.success(`Se ha agregado una nueva revision`)
           return true;
         } catch (error) {
           console.log(error);
