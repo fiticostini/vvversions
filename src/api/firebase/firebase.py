@@ -1,10 +1,11 @@
 from firebase_admin import credentials, initialize_app, storage
 from .firebase_settings import FIREBASE_CONFIG
+import os
+cred = credentials.Certificate(os.environ.get("FIREBASE_URL"))
 
-cred = credentials.Certificate(FIREBASE_CONFIG)
 
+firebase_app = initialize_app(credential=cred, options={"storageBucket": os.environ.get("FIREBASE_BUCKET")})
 
-firebase_app = initialize_app(credential=cred, options={"storageBucket": "vvversions-proyect.appspot.com"})
 
 
 class FirebaseBucket: 
