@@ -292,3 +292,20 @@ def delete_song(song_id):
         return jsonify({"message": "Song deleted"})
     else:
         return jsonify({"error": "Song not found"})
+
+@api.route("/song-byid/<int:song_id>", methods=["GET"])
+@jwt_required()
+def get_song(song_id):
+    print("******************************************")
+    # print(song_id)
+    print("******************************************")
+    song = Song.query.filter_by(id=song_id).first()
+    project = Project.query.filter_by(id=song.project_id).first()
+    result_song = {**song.serialize()}
+    result_project = {**project.serialize()}
+    result = {**result_song, **result_project}
+    print("******************************************")
+    if song:
+        return jsonify({"result": result}), 200
+    else:
+        return jsonify({"error": "Song not found"}), 404
