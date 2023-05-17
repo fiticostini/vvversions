@@ -120,6 +120,29 @@ def create_project():
     return jsonify({"msg": "ocurrio un error"}), 500
 
 
+@api.route("/project/<int:id>", methods=["POST"])
+@jwt_required()
+def create_version(id):
+    body = request.json
+    version_date = body.get("version_date", None)
+    project = Project.query.filter_by(id=id).first()
+    user_data = get_jwt_identity()
+    all_versions = Project.query.filter_by(user_id=user_data["id"], title=project.title).all()
+    version = len(all_versions)
+    new_version = Project(title=project.title, version=version+1, user_id=user_data["id"], version_date=version_date)
+    db.session.add(new_version)
+    
+    try:
+        db.session.commit()
+        return jsonify({"msg": "Version creada con exito"})
+    except Exception as error:
+        db.session.rollback()
+        print(error)
+        return jsonify({"error": "Ha ocurrido un erros"}), 500
+        
+
+
+
 
 @api.route("/project/<int:id>", methods=["DELETE"])
 @jwt_required()
