@@ -27,7 +27,7 @@ export const SongRevision = () => {
   return (
     <div className="p-5 text-end">
       <h4><i>{store.artistName}</i></h4>
-      <h2>{song.title}</h2>
+      <h2 className="me-2">{song.title}</h2>
       
       <ProyectRevision />
 

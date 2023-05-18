@@ -57,7 +57,7 @@ export function Revisions() {
       <div className="text-center">
         <button
           onClick={handleClick}
-          className=" btn btn-outline-dark version fs-6 mt-5 text-end"
+          className=" btn btn-outline-dark version fs-6 mt-3 text-end"
         >
           Add Revision{" "}
         </button>
@@ -65,7 +65,7 @@ export function Revisions() {
       <div>
         {project &&
           project.songs.map((song, index) => (
-            <div className="container d-flex projectcontainer my-3 col-8 justify-content-between ">
+            <div className="container d-flex projectcontainer my-2 col-8 justify-content-between ">
               <div className="d-flex">
                 <div>
                   {" "}
@@ -79,7 +79,7 @@ export function Revisions() {
                     <h2 className="projectname">{project.title} </h2>
                   </div>
                   <div>
-                    <div className="text-start titlesong">title song </div>
+                    <div className="text-start titlesong">Title Song </div>
                   </div>
                   <div className=""></div>
                 </div>
@@ -91,7 +91,7 @@ export function Revisions() {
                 </div>
                 <div className="version">
                   <p>
-                    version {project.version}.{index}{" "}
+                    Version {project.version}.{index}{" "}
                   </p>
                 </div>
                 <div className="">
@@ -101,21 +101,21 @@ export function Revisions() {
                       className="btn btn-outline-dark openbutton2"
                       onClick={() => goToSong(song.id)}
                     >
-                      Go Song
+                      Go to song
                     </button>
                   </div>
                   <button
                     className="deleteproject2 text-danger"
                     onClick={() => actions.deleteSong(song.id)}
                   >
-                    delete song
+                    Delete song
                   </button>
                 </div>
               </div>
             </div>
           ))}
       </div>
-      <div className="d-flex">
+      <div className="d-flex mt-3">
         <div>
           <div className="text-center">
             <img src={VVVERSIONSLOGONEGRO} className="col-2 text-center"></img>

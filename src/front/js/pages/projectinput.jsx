@@ -53,19 +53,19 @@ export const ProjectInput = () => {
           </button>
         </div>
       </div>
-      <div className="my-3 text-center">
+      <div className="text-center">
         <input
           type="text"
-          placeholder="    name"
+          placeholder="    Name"
           value={inputValue}
           onChange={handleInputChange}
           className="placeholder2 me-2"
         />
         <button className="btn version" onClick={addProject}>
-          add a project
+          Add a project
         </button>
         {store.projects.map((project, index) => (
-          <div className="container d-flex projectcontainer my-4 col-8 justify-content-between">
+          <div className="container d-flex projectcontainer my-2 col-8 justify-content-between">
             <div className="d-flex">
               <div className="">
                 <img
@@ -82,12 +82,12 @@ export const ProjectInput = () => {
                   <h2 className="projectname">{project.title} </h2>
                 </div>
                 <div>
-                  <div className="text-start titlesong">title song</div>
+                  <div className="text-start titlesong">Title Project</div>
                 </div>
                 <div className="">
                   <div className="text-start mt-5">
                     <button onClick={() => actions.createVersion(project.id)} type="button" className="newversion p-2 text-white my-1">
-                      new version
+                      New Version
                     </button>
                   </div>
                 </div>
@@ -99,7 +99,7 @@ export const ProjectInput = () => {
                 <p>{project.version_date}</p>{" "}
               </div>
               <div className="version ">
-                <p>version {project.version} </p>
+                <p>Version {project.version} </p>
               </div>
               <div>
                 {project.songs.length == 0 ? (
@@ -110,7 +110,7 @@ export const ProjectInput = () => {
                         type="button"
                         className="addfiles btn btn-outline-dark"
                       >
-                        add files
+                        Add Files
                       </button>
                     </div>{" "}
                   </Link>
@@ -121,7 +121,7 @@ export const ProjectInput = () => {
                       className="btn btn-outline-dark openbutton"
                       onClick={() => handleClick(project.id)}
                     >
-                      open revisions
+                      Open Revisions
                     </button>
                   </div>
                 )}
@@ -130,7 +130,7 @@ export const ProjectInput = () => {
                   className="deleteproject text-danger"
                   onClick={() => actions.deleteProject(project.id)}
                 >
-                  delete project
+                  Delete Project
                 </button>
               </div>
             </div>
