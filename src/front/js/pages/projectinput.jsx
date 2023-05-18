@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import addimage from "../../img/addimage.png";
 import { useNavigate, Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import VVVERSIONSLOGONEGROMOBILE from "../../img/VVVERSIONSLOGONEGROMOBILE.png";
+import VVVERSIONSLOGONEGRO from "../../img/VVVERSIONSLOGONEGRO.png";
 
 export const ProjectInput = () => {
   const [projects, setProjects] = useState([]);
@@ -36,24 +36,22 @@ export const ProjectInput = () => {
 
   return (
     <div>
-      <div className="text-end me-2 mt-3">
+      <div className="d-flex mt-2 p-5">
+        <div className="">
+          <Link to="/">
+            <img src={VVVERSIONSLOGONEGRO} className="col-4 "></img>
+          </Link>
+        </div>
+        <div className="col-6 text-end mt-3 fs-4">
+          <p><i>{store.artistName}</i></p>
+        </div>
+        <div className="col-1 text-center mt-3  fs-5">
           <button
             onClick={handleLogout}
-            className="logouttitle text-danger me-4"
-          >
+            className="logouttitle text-danger">
             <i className="fas fa-sign-out-alt"></i>
           </button>
         </div>
-      <div className="text-end">
-        <div className="">
-          <Link to="/">
-            <img src={VVVERSIONSLOGONEGROMOBILE} className="back2"></img>
-          </Link>
-        </div>
-        <div className="col-12 text-center">
-          <h1>{store.artistName}</h1>
-        </div>
-        
       </div>
       <div className="my-3 text-center">
         <input
@@ -67,7 +65,7 @@ export const ProjectInput = () => {
           add a project
         </button>
         {store.projects.map((project, index) => (
-          <div className="container d-flex projectcontainer my-1 col-8 justify-content-between">
+          <div className="container d-flex projectcontainer my-4 col-8 justify-content-between">
             <div className="d-flex">
               <div className="">
                 <img

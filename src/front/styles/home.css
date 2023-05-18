@@ -194,7 +194,7 @@ a:active {
 }
 
 .addfiles {
-    margin-top: 14px;
+    margin-top: 10px;
     width: 120px;
     height: 40px;
 }
@@ -336,10 +336,9 @@ input::placeholder {
 
 
 .logouttitle {
-    justify-content: end;
     border: none;
     background-color: transparent;
-    
+    margin-top: 5px;
 }
 
 .revisiontitle {
@@ -353,6 +352,6 @@ input::placeholder {
     background-color: transparent;
 }
 
-.artistname {
-    
+.projectname3 {
+    font-weight: 700;
 }
