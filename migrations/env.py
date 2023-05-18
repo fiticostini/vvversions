@@ -24,8 +24,6 @@ def get_engine():
         return current_app.extensions['migrate'].db.engine
 
 
-<<<<<<< HEAD
-=======
 def get_engine_url():
     try:
         return get_engine().url.render_as_string(hide_password=False).replace(
@@ -34,17 +32,11 @@ def get_engine_url():
         return str(get_engine().url).replace('%', '%%')
 
 
->>>>>>> 39af6f8b382e49c13ee0af0772fba75a5c54fad0
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-<<<<<<< HEAD
-config.set_main_option(
-    'sqlalchemy.url', str(get_engine().url).replace('%', '%%'))
-=======
 config.set_main_option('sqlalchemy.url', get_engine_url())
->>>>>>> 39af6f8b382e49c13ee0af0772fba75a5c54fad0
 target_db = current_app.extensions['migrate'].db
 
 # other values from the config, defined by the needs of env.py,
