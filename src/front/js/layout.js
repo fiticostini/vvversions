@@ -2,14 +2,23 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
+import { ToastContainer } from "react-toastify";
 
 import { Home } from "./pages/home";
-import { Demo } from "./pages/demo";
+import { Register } from "./pages/register.jsx";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
+import { Main } from "./pages/main.jsx";
+import { About } from "./pages/about.jsx";
 
 import { Navbar } from "./component/navbar";
-import { Footer } from "./component/footer";
+import Login from "./pages/login";
+import { AddSong } from "./pages/addsong.jsx";
+import { SongRevision } from "./pages/SongRevision.jsx";
+import { ProjectInput } from "./pages/projectinput.jsx";
+import {  Revisions } from "./pages/revisions.jsx";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 //create your first component
 const Layout = () => {
@@ -21,16 +30,24 @@ const Layout = () => {
 
     return (
         <div>
+            
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
-                    <Navbar />
+                <ToastContainer />
                     <Routes>
                         <Route element={<Home />} path="/" />
-                        <Route element={<Demo />} path="/demo" />
+                        <Route element={<Register />} path='/register' />
+                        <Route element={<Login />} path='/user/login' />
+                        <Route element={<About />} path="/about" />
                         <Route element={<Single />} path="/single/:theid" />
+                        <Route element={<Main />} path="/main" />
+                        <Route element={<AddSong />} path="/addsong/:id" />
+                        <Route element={<SongRevision/>} path="/songrevision/:projectid/:songid"/>
+                        <Route element={<ProjectInput />} path="/projectinput" />
+                        <Route element={<Revisions />} path="/revisions/:id" />
+
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
-                    <Footer />
                 </ScrollToTop>
             </BrowserRouter>
         </div>
